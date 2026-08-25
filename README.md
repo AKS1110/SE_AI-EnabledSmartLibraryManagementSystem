@@ -1,4 +1,4 @@
 
 ## 📐 System Use Case Diagram
 
-![Use Case Diagram](./Use Case Diagram.drawio (1).png)
+![Use Case Diagram](docs/use_case_diagram.png)
