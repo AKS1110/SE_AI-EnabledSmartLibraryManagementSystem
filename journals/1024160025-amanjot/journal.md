@@ -29,4 +29,4 @@
 - Updated and pushed the **project proposal** to the repository.
 - Added the completed **Use Case Diagram** to the project documentation.
 - Updated and pushed the **project proposal (LaTeX)** to the repository.
-- Added the completed **Use Case Diagram** and **Data Flow Diagrams (Level 0, 1, 2 DFDs)** to the project documentation.
+- Added the completed **Use Case Diagram** and **Data Flow Diagrams (Level 0, 1, 2 DFDs)** to the project proposal.
