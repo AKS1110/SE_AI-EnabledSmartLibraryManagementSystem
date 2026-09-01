@@ -1,5 +1,5 @@
 
-## Week 2 (Aug 10 – Aug 16): System Planning & Initial Presentation
+## Week 2 (Aug 10 – Aug 16): Planning & Initial Presentation
 
 ### Objective
 Structure the system architecture, select appropriate technologies, and present the initial project proposal to gather feedback.
