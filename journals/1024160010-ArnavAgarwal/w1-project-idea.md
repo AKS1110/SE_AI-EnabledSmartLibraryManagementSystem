@@ -1,5 +1,5 @@
 
-## Week 1 (Aug 3 – Aug 9): Project Ideation and Problem Definition
+## Week 1 (Aug 3 – Aug 9): Project Idea
 
 ### Objective
 Identify a practical software engineering project that solves a real-world administrative issue while offering enough scope for meaningful development and AI integration.
