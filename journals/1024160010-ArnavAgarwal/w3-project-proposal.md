@@ -5,7 +5,7 @@
 Formalize the project idea into a structured, academic IEEE-style project proposal.
 
 ### Work Done
-* **Proposal Drafting:** Independently authored the complete first draft of the project proposal using LaTeX in IEEE conference format.
+* **Proposal Drafting:** Made the first draft of the project proposal using LaTeX in IEEE conference format.
 * **Documentation:** Documented the initial "AI-Powered Smart Campus Management System," detailing the introduction, problem statement, objectives, and expected outcomes.
 * **Architectural Diagram:** Designed and coded the high-level architectural block diagram using TikZ within LaTeX to visually represent data flow between the UI, API, Agents, and Database.
 * **Agent Definitions:** Formally defined the specific functionalities of the *Campus Intelligence Agent*, *Student Onboarding Agent*, and *Monitoring and Notification Agent*.
