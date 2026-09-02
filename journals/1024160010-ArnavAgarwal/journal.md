@@ -6,7 +6,7 @@
 
 ---
 
-## Week 1 (Aug 3 – Aug 9): Project Ideation and Problem Definition
+## Week 1 (Aug 3 – Aug 9): Project Idea
 
 ### Objective
 Identify a practical software engineering project that solves a real-world administrative issue while offering enough scope for meaningful development and AI integration.
@@ -25,7 +25,7 @@ Understanding that AI should act as an enabling technology within a broader, rob
 
 ---
 
-## Week 2 (Aug 10 – Aug 16): System Planning & Initial Presentation
+## Week 2 (Aug 10 – Aug 16): Planning & Presentation
 
 ### Objective
 Structure the system architecture, select appropriate technologies, and present the initial project proposal to gather feedback.
@@ -44,13 +44,13 @@ Selecting a tech stack is about ensuring seamless interoperability across front-
 
 ---
 
-## Week 3 (Aug 17 – Aug 23): First Draft of Project Proposal (IEEE Format)
+## Week 3 (Aug 17 – Aug 23): Draft of Project Proposal (IEEE Format)
 
 ### Objective
 Formalize the project idea into a structured, academic IEEE-style project proposal.
 
 ### Work Done
-* **Proposal Drafting:** Independently authored the complete first draft of the project proposal using LaTeX in IEEE conference format.
+* **Proposal Drafting:** Authored the first draft of the project proposal using LaTeX in IEEE conference format.
 * **Documentation:** Documented the initial "AI-Powered Smart Campus Management System," detailing the introduction, problem statement, objectives, and expected outcomes.
 * **Architectural Diagram:** Designed and coded the high-level architectural block diagram using TikZ within LaTeX to visually represent data flow between the UI, API, Agents, and Database.
 * **Agent Definitions:** Formally defined the specific functionalities of the *Campus Intelligence Agent*, *Student Onboarding Agent*, and *Monitoring and Notification Agent*.
