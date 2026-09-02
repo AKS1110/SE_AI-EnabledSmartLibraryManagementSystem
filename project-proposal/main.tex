@@ -1,21 +1,72 @@
-\documentclass[11pt]{article}
-\usepackage[utf8]{inputenc}
-\usepackage{geometry}
-\geometry{margin=1in}
-\usepackage{graphicx}
+\documentclass[11pt,a4paper]{article}
+
+\usepackage[margin=1in]{geometry}
 \usepackage{hyperref}
 \usepackage{enumitem}
+\usepackage{graphicx}
+\usepackage{xcolor}
 \usepackage{float}
 \usepackage{tikz}
 \usetikzlibrary{shapes.geometric, arrows.meta, positioning}
 
-% Set uniform border thickness and padding for images
-\setlength{\fboxrule}{0.2pt}
-\setlength{\fboxsep}{0pt}
+% -----------------------------------------------------
+% bvraghav-tiet-ucs503p-article.sty
+% -----------------------------------------------------
 
-\title{\textbf{AI-Enabled Smart Library Management and Resource Recommendation System}}
-\author{Aradhya Goyal (Roll No: 1024160135) \\ Amanjot Kaur Sidhu (Roll No: 1024160025) \\ Arnav Agarwal (Roll No: 1024160010)}
-\date{August 25, 2026}
+% Variable: Lab Instructor
+\makeatletter
+\newcommand{\BvrSetLabInstructor}[1]{%
+  \gdef\Bvr@LabInstructor{#1}}
+\newcommand{\Bvr@LabInstructor}{Dr. Jeelani Asif}
+
+% public accessor
+\newcommand{\BvrLabInstructorValue}{\Bvr@LabInstructor}
+\makeatother
+
+% Add subtitle
+\usepackage{titling}
+
+% -- Set title bold
+\pretitle{\begin{center}\bfseries\fontsize{18bp}{18bp}\selectfont}
+
+\makeatletter
+\newcommand{\BvrSubtitle}[1]{%
+  \posttitle{%
+    \par\end{center}
+    \begin{center}\large#1\end{center}
+    \vskip 0.5em}%
+}
+\makeatother
+
+% Hints in the section title(s)
+\newcommand{\BvrHint}[1]{%
+  {\normalfont\normalsize\itshape\hfill #1}}
+
+% -----------------------------------------------------
+
+\title{AI-Enabled Smart Library Management and Resource Recommendation System}
+
+\BvrSetLabInstructor{Dr. Jeelani Asif}
+
+\BvrSubtitle{%
+  Project Proposal for UCS503P  \\
+  Submitted to: \BvrLabInstructorValue \\ \bfseries
+  Thapar Institute of Engineering and Technology%
+}
+
+
+\author{
+  Arnav Agarwal, CSED%
+  \thanks{Roll No: \texttt{1024160010} \quad Email: \texttt{aagarwal_be24@thapar.edu}}
+  \and
+  Aradhya Goyal, CSED%
+  \thanks{Roll No: \texttt{1024160135} \quad Email: \texttt{agoyal15_be24@thapar.edu}}
+  \and
+  Amanjot Kaur Sidhu, CSED%
+  \thanks{Roll No: \texttt{1024160025} \quad Email: \texttt{asidhu1_be24@thapar.edu}}
+}
+
+\date{29 August, 2026}
 
 \begin{document}
 
