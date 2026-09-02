@@ -1,35 +1,29 @@
-# Engineering Journal: System Architecture & Design
+## Week 1 (Aug 3 – Aug 9): Project Ideation & Brainstorming
 
-### August 19 – 21, 2026: Use Case Diagram Design
-* **Actor & Agent Identification**: Defined the primary human actors (Student, Librarian) and specialized AI assistants (Campus Intelligence Agent, Student Onboarding Agent, Monitoring & Notification Agent).
-* **Use Case Mapping**: Designed the core use cases across library operations, including asset searching, catalog/student onboarding, fine calculation, natural language querying, and demand monitoring.
-* **Relationship Specification**: Modeled system dependencies using standard UML relationships, establishing `<<include>>` for mandatory sub-processes and `<<extend>>` for conditional workflows like fine calculations and recommendation triggers.
+* Participated in team brainstorming sessions to explore and finalize potential project ideas.
+* Finalized the project concept: an **AI-Enabled Library Management System** integrated with intelligent agents to automate core operational tasks.
 
 ---
 
-### August 24 – 25, 2026: Level 0 DFD (Context Diagram)
-* **System Boundary Definition**: Modeled the high-level boundary for the centralized `AI-Enabled Library Management System`.
-* **External Entity & Flow Mapping**: Established all primary directional data inflows and outflows between the external entities (Students, Librarian, and the three AI agents) and the core system.
+## Week 2 (Aug 10 – Aug 16): Agent Responsibilities & Task Definition
+
+* Defined and refined the specific roles and task boundaries for the three autonomous AI agents:
+  * **Campus Intelligence Agent**: Handling recommendations and natural language search assistance.
+  * **Student Onboarding Agent**: Managing student and asset record ingestion.
+  * **Monitoring & Notification Agent**: Tracking book circulation demand, identifying overdues, calculating fines, and dispatching alerts.
 
 ---
 
-### August 26, 2026: Level 1 DFD (Process Decomposition)
-* **Core Process Decomposition**: Broken down the central system into four main operational processes:
-  * `1.0 Search & Intelligent Assistance`
-  * `2.0 Records & Ingestion`
-  * `3.0 Circulation & Fine Tracking`
-  * `4.0 Monitoring & Alert Generation`
-* **Data Store Architecture**: Defined data persistence layers to handle records cleanly:
-  * `D1: Library Catalog & User Database`
-  * `D2: Circulation & Fines Store`
-  * `D3: Notification Queue`
-* **Data Flow Routing**: Mapped input and output flows between external actors, processes, and persistent data stores.
+## Week 3 (Aug 17 – Aug 23): Use Case Diagram & Level 0 DFD
+
+* **UML Use Case Diagram**: Designed the use case diagram defining interactions between human actors, AI agents, and system operations; mapped `<<include>>` and `<<extend>>` dependencies.
+* **Level 0 DFD (Context Diagram)**: Modeled the centralized system boundary and mapped high-level input/output data flows between external entities, AI agents, and the core platform.
 
 ---
 
-### August 27, 2026: Level 2 DFD (Process 1.0 Decomposition)
-* **Sub-process Breakdown**: Detailed `Process 1.0 (Search & Intelligent Assistance)` into its internal sub-routines:
-  * `1.1 Parse Query & Extract Intent`
-  * `1.2 Query Catalog & Rank Results`
-  * `1.3 Generate Context Recommendations`
-* **Architecture-Agnostic Design**: Structured query handling, intent parsing, and recommendation pipelines to support both conversational chatbot flows and automated background agent lookups.
+## Week 4 (Aug 24 – Aug 30): Level 1 & Level 2 Data Flow Diagrams
+
+* **Level 1 DFD**: Decomposed the central system into four primary functional processes (`1.0`–`4.0`) and defined persistent data stores (`D1: Catalog/Users`, `D2: Circulation/Fines`, `D3: Notification Queue`).
+* **Level 2 DFD (Process 1.0)**: Decomposed `Search & Intelligent Assistance` into modular sub-processes (`1.1 Parse Query`, `1.2 Query Catalog`, `1.3 Generate Recommendations`) structured to support both chatbot and agent search flows.
+
+---
