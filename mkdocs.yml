@@ -40,7 +40,7 @@ theme:
   logo: assets/tiet-logo.svg
   favicon: assets/favicon.png
 
-repo_url: site_url: https://aks1110.github.io/SE_AI-EnabledSmartLibraryManagementSystem
+repo_url: https://aks1110.github.io/SE_AI-EnabledSmartLibraryManagementSystem
 repo_name: SE_AI-EnabledSmartLibraryManagementSystem
 
 copyright: "Copyright &copy; 2026 Arnav Agarwal, Aradhya Goyal, Amanjot Kaur Sidhu • UCS503 Software Engineering"
