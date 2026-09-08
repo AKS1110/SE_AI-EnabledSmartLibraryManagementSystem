@@ -1,5 +1,5 @@
 site_name: "AI-Enabled Smart Library Management and Resource Recommendation System"
-site_url: https://zzzelicrem.github.io/SE_AI-EnabledSmartLibraryManagementSystem
+site_url: https://aks1110.github.io/SE_AI-EnabledSmartLibraryManagementSystem
 
 plugins:
 - search
@@ -40,7 +40,7 @@ theme:
   logo: assets/tiet-logo.svg
   favicon: assets/favicon.png
 
-repo_url: https://github.com/zzzelicrem/SE_AI-EnabledSmartLibraryManagementSystem
+repo_url: site_url: https://aks1110.github.io/SE_AI-EnabledSmartLibraryManagementSystem
 repo_name: SE_AI-EnabledSmartLibraryManagementSystem
 
 copyright: "Copyright &copy; 2026 Arnav Agarwal, Aradhya Goyal, Amanjot Kaur Sidhu • UCS503 Software Engineering"
@@ -48,7 +48,7 @@ copyright: "Copyright &copy; 2026 Arnav Agarwal, Aradhya Goyal, Amanjot Kaur Sid
 extra:
   social:
   - icon: fontawesome/brands/github
-    link: https://github.com/zzzelicrem/SE_AI-EnabledSmartLibraryManagementSystem
+    link: https://github.com/AKS1110/SE_AI-EnabledSmartLibraryManagementSystem
     name: Git Repo for Smart Library Management System
 
 extra_css:
