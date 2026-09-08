@@ -46,7 +46,7 @@ To run the project locally:
 
 ```bash
 # Clone the repository
-git clone https://github.com/zzzelicrem/SE_AI-EnabledSmartLibraryManagementSystem.git
+git clone https://github.com/AKS1110/SE_AI-EnabledSmartLibraryManagementSystem.git
 
 # Enter the project directory
 cd SE_AI-EnabledSmartLibraryManagementSystem
