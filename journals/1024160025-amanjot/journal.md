@@ -30,3 +30,12 @@
 - Added the completed **Use Case Diagram** to the project documentation.
 - Updated and pushed the **project proposal (LaTeX)** to the repository.
 - Added the completed **Use Case Diagram** and **Data Flow Diagrams (Level 0, 1, 2 DFDs)** to the project proposal.
+
+## Week 5 (Aug 31 – Sep 6): MkDocs Setup & Deployment
+
+- Configured **MkDocs Material** for the project documentation website.
+- Updated `mkdocs.yml` with the required **theme, logo, navigation, CSS, and repository settings**.
+- Enabled **GitHub Actions** for automatic documentation deployment.
+- Generated and deployed the website to the **`gh-pages` branch**.
+- Configured **GitHub Pages** to serve the website from the `gh-pages` branch.
+- Resolved **MkDocs configuration and deployment issues**.
