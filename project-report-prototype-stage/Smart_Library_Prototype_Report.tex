@@ -1,5 +1,9 @@
 \documentclass{tietreport}
 
+% ============================================================
+% PACKAGES
+% ============================================================
+
 \usepackage{graphicx}
 \usepackage{float}
 \usepackage{booktabs}
@@ -8,611 +12,1158 @@
 \usepackage{enumitem}
 \usepackage{hyperref}
 
-% -----------------------------------------------------
-% Project-specific figure paths
-% -----------------------------------------------------
-\graphicspath{
-  {docs/Diagrams/}
-  {../docs/Diagrams/}
-  {../../docs/Diagrams/}
-}
+% Fix fancyhdr head-height warning from the report template
+\setlength{\headheight}{15pt}
 
-% -----------------------------------------------------
-% Title-page information
-% -----------------------------------------------------
+% ============================================================
+% PROJECT INFORMATION
+% ============================================================
 
+% Course / Lab header
 \TitlePageHeader{%
-  UCS503P - Software Engineering%
+    UCS503P - Software Engineering%
 }
 
+% Main project title
 \ProjectTitle{%
-  AI-Enabled Smart Library Management and Resource Recommendation System%
+    AI-Enabled Smart Library Management\\
+    and Resource Recommendation System%
 }
 
+% Report type
 \ProjectSubTitle{%
-  Prototype Report%
+    Prototype Report%
 }
 
+% Student information
 \author{%
-  \texttt{1024160010} Arnav Agarwal \\
-  \texttt{1024160135} Aradhya Goyal \\
-  \texttt{1024160025} Amanjot Kaur Sidhu%
+    \texttt{1024160010} Arnav Agarwal \\
+    \texttt{1024160135} Aradhya Goyal \\
+    \texttt{1024160025} Amanjot Kaur Sidhu%
 }
 
+% Degree / programme
 \TitlePageSubText{%
-  BE Third Year, CSE%
+    BE Third Year, CSE%
 }
 
+% Faculty advisor
 \AdvisorName{%
-  Dr. Jeelani Asif%
+    Dr. Jeelani Asif%
 }
 
+% Evaluation information
 \TitlePageFooterText{{%
     \large Prototype Evaluation \\[0.2cm]
     \bfseries Computer Science and Engineering
     Department%
-  } \\[0.15cm]
-  Thapar Institute of Engineering and Technology,
-  Patiala%
+    } \\[0.15cm]
+    Thapar Institute of Engineering and Technology,
+    Patiala%
 }
 
-% -----------------------------------------------------
+% ============================================================
+% DOCUMENT
+% ============================================================
 
 \begin{document}
 
+% ============================================================
+% TITLE PAGE
+% ============================================================
+
 \maketitle
+
+% ============================================================
+% TABLE OF CONTENTS
+% ============================================================
 
 \tableofcontents
 
-% =====================================================
-% CHAPTER 1
-% =====================================================
+% ============================================================
+% LIST OF FIGURES
+% ============================================================
+
+\listoffigures
+
+% ============================================================
+% CHAPTER 1: INTRODUCTION
+% ============================================================
 
 \chapter{Introduction}
 
 \section{Background and Context}
 
-University libraries manage books and other learning resources while
-maintaining student records, borrowing transactions, due dates, fines, and
-resource availability. Conventional library management systems provide the
-basic storage and retrieval functionality required for these operations, but
-many workflows still depend on manual searching, record entry, overdue
-checking, and administrative analysis.
+University libraries manage large collections of books and other learning
+resources while handling student records, issue and return transactions,
+overdue items, fines, and resource availability. Conventional library
+management systems primarily provide storage, search, and CRUD-based
+operations, leaving several administrative activities manual and reactive.
 
-The proposed system, \textit{AI-Enabled Smart Library Management and Resource
-Recommendation System}, extends conventional library management with a
-controlled multi-agent artificial intelligence layer. The objective is not
-to replace deterministic library operations with AI, but to use AI where
-natural-language understanding, recommendation, summarization, and
-data-driven assistance can provide practical value.
+The proposed Smart Library Management System combines conventional library
+workflows with a lightweight multi-agent artificial intelligence layer. The
+system is designed to assist students with resource discovery and
+recommendation while helping administrators with record onboarding,
+overdue monitoring, notifications, and resource-demand analysis.
 
-The project proposal defines three specialized agents: the Library
-Intelligence Agent for natural-language resource discovery and
-recommendation, the Record Onboarding Agent for validation and duplicate
-detection during bulk record import, and the Library Monitoring Agent for
-overdue monitoring, notifications, and resource-demand analysis. The agents
-are integrated with application APIs and a MySQL database so that
-AI-assisted functionality remains grounded in actual library data.
+The project uses artificial intelligence as an enabling technology rather
+than as a research objective. The primary focus remains dependable
+software engineering, workflow automation, system integration, measurable
+improvement, and practical deployment.
 
 \section{Problem Statement}
 
-Several operational problems motivate the development of the prototype:
+University libraries handle a large number of resource records, student
+records, borrowing transactions, and overdue items. Although conventional
+library systems can store and retrieve these records, several operational
+problems remain.
 
-\begin{itemize}[leftmargin=0.7cm]
-    \item \textbf{Manual resource discovery:} Students may need to navigate
-    through multiple search and filtering options before identifying a
-    relevant and available resource.
+\begin{itemize}
 
-    \item \textbf{Manual record onboarding:} Bulk student or catalog data can
-    contain malformed records, repeated entries, or records that are
-    sufficiently similar to existing records to require review.
+    \item \textbf{Manual resource discovery:}
+    Students may need to navigate through multiple search and filtering
+    options to determine whether a suitable resource is available.
 
-    \item \textbf{Reactive overdue management:} Overdue items and fines may
-    require repeated manual checks, delaying reminders and administrative
-    action.
+    \item \textbf{Manual record onboarding:}
+    Importing large numbers of student or member records can require
+    repetitive validation and manual duplicate checking.
 
-    \item \textbf{Limited demand visibility:} Search activity can contain
-    useful information about resources that students want but that the
-    library does not adequately stock.
+    \item \textbf{Reactive overdue management:}
+    Overdue resources may only be identified after staff manually inspect
+    issue and due-date records.
 
-    \item \textbf{Data without intelligent assistance:} Conventional
-    databases store library information but do not naturally interpret
-    student requests or convert demand patterns into administrative
-    recommendations.
+    \item \textbf{Limited demand visibility:}
+    Library administrators may not have an immediate way to identify
+    frequently issued resources with insufficient available copies.
+
+    \item \textbf{Data without assistance:}
+    A conventional database stores library information but does not
+    directly assist users in converting that information into actionable
+    answers or recommendations.
+
 \end{itemize}
 
-The prototype therefore focuses on combining reliable library workflows with
-controlled AI assistance while retaining deterministic backend control over
-transactions, fines, and database modifications.
+\textbf{Why this matters now:}
+A university library serves a large student population with continuously
+changing resource requirements. Improving resource discovery, record
+processing, overdue monitoring, and demand visibility can reduce repetitive
+administrative effort and improve the usability of existing library
+resources.
 
-\section{Prototype Objectives}
+\section{Project Objectives}
 
-The prototype is designed to establish the core engineering foundation and
-demonstrate the major workflows described in the project proposal.
+The prototype is designed to achieve the following objectives:
 
-\begin{enumerate}[leftmargin=0.7cm]
-    \item \textbf{Implement the core library platform:} Establish the
-    frontend, backend API, MySQL database integration, resource search,
-    student records, circulation, and fine tracking.
+\begin{enumerate}
 
-    \item \textbf{Implement controlled AI assistance:} Provide structured
-    natural-language interpretation through the Library Intelligence Agent
-    while preventing the language model from directly modifying the
-    database.
+    \item Develop a functional web-based Smart Library Management System.
 
-    \item \textbf{Implement automated administrative workflows:} Provide
-    validation and duplicate detection for onboarding and deterministic
-    overdue/fine monitoring with notification generation.
+    \item Provide resource and student/member management.
 
-    \item \textbf{Provide measurable evaluation:} Define testable criteria
-    for search response time, duplicate detection, overdue detection,
-    recommendation quality, API performance, and reliability.
+    \item Support resource search and real-time availability display.
 
-    \item \textbf{Maintain an extensible engineering architecture:} Separate
-    frontend, backend services, database models, and AI agents so that later
-    iterations can extend the system without rewriting the complete
-    application.
+    \item Implement issue, return, due-date, and fine workflows.
+
+    \item Provide natural-language resource discovery using the Library
+    Intelligence Agent.
+
+    \item Provide bulk record validation and duplicate detection using the
+    Record Onboarding Agent.
+
+    \item Provide automated overdue monitoring and notification support
+    using the Library Monitoring Agent.
+
+    \item Analyse resource demand and availability for administrative
+    decision support.
+
+    \item Maintain controlled interaction between AI agents and the
+    underlying database.
+
+    \item Support automated testing, continuous integration, and
+    deployment.
+
 \end{enumerate}
 
-% =====================================================
-% CHAPTER 2
-% =====================================================
+% ============================================================
+% CHAPTER 2: METHODOLOGY AND DESIGN
+% ============================================================
 
 \chapter{Methodology and Design}
 
+\section{Development Methodology}
+
+The project follows an incremental engineering approach based on rapid
+time-to-value and short feedback cycles.
+
+The initial implementation focuses on establishing a usable minimum viable
+product containing authentication, resource management, resource search,
+issue and return workflows, and database integration.
+
+AI-assisted functionality is introduced incrementally after the core
+library workflow is operational. Continuous integration is established
+early so that code changes can be checked through automated testing,
+linting, and build validation.
+
+Each development iteration produces a demonstrable increment that can be
+tested independently and improved using feedback.
+
 \section{System Architecture}
 
-The prototype follows the modular three-tier architecture defined in the
-project proposal. A web client provides student and administrator
-interfaces, the backend exposes controlled REST APIs and deterministic
-business logic, and MySQL stores the authoritative library data. A separate
-AI agent layer provides constrained natural-language interpretation and
-analytics.
+The system follows a modular three-tier web architecture integrated with a
+controlled AI agent layer.
 
 \subsection{High-Level Design}
 
-The main architectural layers are:
+The major components of the system are:
 
-\begin{enumerate}[leftmargin=0.7cm]
-    \item \textbf{Student/Administrator Web Interface:} Provides resource
-    search, availability information, loan and fine information, and
-    administrator-oriented monitoring and demand views.
+\begin{enumerate}
 
-    \item \textbf{Backend Application and REST APIs:} Handles
-    authentication and authorization, resource management, student records,
-    circulation, fine calculation, notification workflows, and communication
-    with the AI layer.
+    \item \textbf{Student / Administrator Web Interface:}
+    Provides interfaces for students and administrators to access library
+    services and management functions.
 
-    \item \textbf{MySQL Database:} Stores students, employees, assets,
-    books, issuing details, fines, notifications, and search-demand logs.
+    \item \textbf{Backend Application and REST APIs:}
+    Handles authentication, authorization, library workflows, resource
+    management, student records, transactions, and communication with the
+    AI agents.
 
-    \item \textbf{Controlled AI Agent Layer:} Contains the Library
-    Intelligence Agent, Record Onboarding Agent, and Library Monitoring
-    Agent. Agents interact with application services through controlled
-    interfaces rather than unrestricted database access.
+    \item \textbf{MySQL Database:}
+    Stores library resources, student/member records, borrowing
+    transactions, due dates, fines, and availability information.
+
+    \item \textbf{Controlled AI Agent Layer:}
+    Provides the Library Intelligence Agent, Record Onboarding Agent, and
+    Library Monitoring Agent through controlled application APIs and
+    tools.
+
 \end{enumerate}
 
-\subsection{Data Flow Design}
+The architecture separates deterministic operations from AI-assisted
+interpretation and recommendation.
 
-The system separates deterministic operations from AI-assisted operations.
-For example, due-date comparison and fine calculation are deterministic
-backend operations. Natural-language query interpretation and
-resource-demand analysis can use AI or analytical logic, but the resulting
-actions are validated by backend services before affecting persistent data.
+Critical operations such as issue and return transactions, availability
+calculation, due-date checking, and fine calculation are handled by the
+backend and database layers.
 
-\begin{figure}[H]
-    \centering
-    \IfFileExists{Level_0_DFD.png}{%
-        \includegraphics[width=0.88\textwidth]{Level_0_DFD.png}%
-    }{%
-        \fbox{\parbox{0.82\textwidth}{\centering
-        Level 0 DFD image not found at the configured figure path.}}%
-    }
-    \caption{Level 0 Data Flow Diagram of the Smart Library Management System}
-    \label{fig:level0}
-\end{figure}
+\subsection{Technical Stack}
 
-\begin{figure}[H]
-    \centering
-    \IfFileExists{Level_1_DFD.png}{%
-        \includegraphics[width=0.88\textwidth]{Level_1_DFD.png}%
-    }{%
-        \fbox{\parbox{0.82\textwidth}{\centering
-        Level 1 DFD image not found at the configured figure path.}}%
-    }
-    \caption{Level 1 Data Flow Diagram}
-    \label{fig:level1}
-\end{figure}
+The project uses mature technologies suitable for rapid engineering and
+deployment.
 
-\begin{figure}[H]
-    \centering
-    \IfFileExists{Level_2_DFD.png}{%
-        \includegraphics[width=0.88\textwidth]{Level_2_DFD.png}%
-    }{%
-        \fbox{\parbox{0.82\textwidth}{\centering
-        Level 2 Data Flow Diagram}
-        }%
-    }
-    \caption{Level 2 Data Flow Diagram}
-    \label{fig:level2}
-\end{figure}
+\begin{itemize}
 
-\section{Technical Stack}
+    \item \textbf{Frontend:} React.js / Web Client
 
-The prototype uses a single Python-oriented backend and AI stack to avoid
-unnecessary technology fragmentation.
+    \item \textbf{Backend:} REST-based application service
 
-\begin{itemize}[leftmargin=0.7cm]
-    \item \textbf{Frontend:} React.js with TypeScript and Tailwind CSS.
-    \item \textbf{Backend:} FastAPI with Python 3.11+.
-    \item \textbf{Database:} MySQL 8.0+.
-    \item \textbf{ORM and database access:} SQLAlchemy with asynchronous
-    MySQL connectivity.
-    \item \textbf{AI integration:} LangChain with structured Pydantic
-    outputs and OpenAI API integration.
-    \item \textbf{Validation:} Pydantic models for API and agent data.
-    \item \textbf{Duplicate detection:} RapidFuzz-based string similarity
-    combined with deterministic Roll Number and ISBN checks.
-    \item \textbf{Testing:} Pytest-based unit and integration testing.
-    \item \textbf{Version control and CI/CD:} GitHub repository and automated
-    CI checks for testing, linting, and build validation.
+    \item \textbf{Database:} MySQL
+
+    \item \textbf{AI Layer:} Controlled AI agents with structured outputs
+
+    \item \textbf{Communication:} REST APIs and structured JSON
+
+    \item \textbf{Testing:} Automated unit and integration testing
+
+    \item \textbf{CI/CD:} Automated build, test, and deployment pipeline
+
+    \item \textbf{Deployment:} Containerized or cloud-hosted application
+
 \end{itemize}
+
+% ============================================================
+% SYSTEM DIAGRAMS
+% ============================================================
+
+\section{System Design and Diagrams}
+
+\subsection{Use Case Diagram}
+
+The Use Case Diagram defines the interactions between the primary human
+actors, Students and Librarian, and the three specialized AI agents.
+
+The system uses the following final agent terminology:
+
+\begin{itemize}
+
+    \item Library Intelligence Agent
+
+    \item Record Onboarding Agent
+
+    \item Library Monitoring Agent
+
+\end{itemize}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[
+        width=0.82\textwidth,
+        keepaspectratio
+    ]{docs/Diagrams/Use Case Diagram.png}
+    \caption{Use Case Diagram of the Smart Library Management System.}
+    \label{fig:usecase}
+\end{figure}
+
+% ============================================================
+% DATA FLOW DIAGRAMS
+% ============================================================
+
+\subsection{Data Flow Diagram}
+
+The Data Flow Diagrams describe the movement of information between
+students, librarians, the Smart Library Management System, the database,
+and the controlled AI agent layer.
+
+\subsubsection{Level 0 -- Context Diagram}
+
+The Level 0 Context Diagram presents the overall system boundary and the
+major information exchanges between users, AI agents, and the Smart Library
+Management System.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[
+        width=0.88\textwidth,
+        keepaspectratio
+    ]{docs/Diagrams/DFD_Level0.png}
+    \caption{Level 0 Context Data Flow Diagram.}
+    \label{fig:dfd0}
+\end{figure}
+\subsubsection{Level 1 -- System Subsystems}
+
+The Level 1 DFD decomposes the Smart Library Management System into its
+major functional subsystems, including intelligent search, library records
+and resource management, circulation and fine tracking, and monitoring and
+notification.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[
+        width=0.88\textwidth,
+        keepaspectratio
+    ]{docs/Diagrams/DFD_Level1.png}
+    \caption{Level 1 Data Flow Diagram showing the major system
+    subsystems.}
+    \label{fig:dfd1}
+\end{figure}
+
+\subsubsection{Level 2 -- Intelligent Search Process}
+
+The Level 2 DFD provides a detailed representation of the intelligent
+resource-search workflow, including natural-language query processing,
+catalogue retrieval, availability checking, and recommendation generation.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[
+        width=0.88\textwidth,
+        keepaspectratio
+    ]{docs/Diagrams/Level_2_DFD.png}
+    \caption{Level 2 Data Flow Diagram for Intelligent Resource Search.}
+    \label{fig:dfd2}
+\end{figure}
+
+% ============================================================
+% ENTITY RELATIONSHIP DIAGRAM
+% ============================================================
+
+\subsection{Entity Relationship Diagram}
+
+The Entity Relationship Diagram represents the principal database entities
+and their relationships.
+
+The major entities include:
+
+\begin{itemize}
+
+    \item STUDENTS
+
+    \item EMPLOYEE
+
+    \item ASSETS
+
+    \item BOOKS
+
+    \item ISSUING\_DETAILS
+
+    \item FINES
+
+    \item NOTIFICATION\_QUEUE
+
+    \item SEARCH\_DEMAND\_LOGS
+
+\end{itemize}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[
+        width=0.92\textwidth,
+        keepaspectratio
+    ]{docs/Diagrams/ER_Diagram.png}
+    \caption{Entity Relationship Diagram of the Smart Library Management
+    System.}
+    \label{fig:er}
+\end{figure}
+
+% ============================================================
+% ACTIVITY / SWIMLANE DIAGRAM
+% ============================================================
+
+\subsection{Activity and Swimlane Diagram}
+
+The Activity and Swimlane Diagram illustrates the interaction between the
+student, web interface, backend application, Library Intelligence Agent,
+MySQL database, and librarian/notification layer during intelligent
+resource discovery and borrowing.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[
+        width=0.96\textwidth,
+        keepaspectratio
+    ]{docs/Diagrams/SwimLane_Diagram.png}
+    \caption{Activity and Swimlane Diagram for Intelligent Resource
+    Discovery and Borrowing.}
+    \label{fig:swimlane}
+\end{figure}
+
+% ============================================================
+% DATABASE DESIGN
+% ============================================================
 
 \section{Database Design}
 
-The database extends the existing library schema with two operational
-tables.
+The system uses MySQL as the primary relational database.
 
-\subsection{Notification Queue}
+The existing core entities include student records, employee records,
+library assets, books, issuing transactions, and fines.
 
-The \texttt{NOTIFICATION\_QUEUE} table stores notifications generated by
-overdue and other automated workflows. It references the student table and
-supports notification types and processing states.
+The database is extended with two additional entities:
 
-\subsection{Search Demand Logs}
+\begin{itemize}
 
-The \texttt{SEARCH\_DEMAND\_LOGS} table records student search activity,
-including the extracted category and timestamp. These records provide the
-data required for later demand analysis and acquisition recommendations.
+    \item \textbf{NOTIFICATION\_QUEUE:}
+    Stores notifications generated for overdue and other
+    library-management events.
 
-\subsection{Performance-Oriented Indexing}
+    \item \textbf{SEARCH\_DEMAND\_LOGS:}
+    Stores natural-language search queries and extracted categories for
+    subsequent resource-demand analysis.
 
-Indexes are provided for frequently accessed search and monitoring fields.
-In particular, composite indexes on
-\texttt{ISSUING\_DETAILS(Status, Due\_Date)} and
-\texttt{BOOKS(Category, Total\_Copies)} support overdue scanning and
-inventory-oriented analysis.
-
-\section{Implementation Details}
-
-\subsection{Library Intelligence Agent}
-
-The Library Intelligence Agent interprets a student's natural-language
-request into a structured representation containing the intended operation,
-search keywords, category, availability requirement, and confidence.
-
-The prototype uses a Pydantic structured-output schema. The language model
-does not receive database credentials or unrestricted SQL execution
-capability. After interpretation, the backend performs parameterized
-database queries and calculates real-time availability from catalog and
-circulation data.
-
-If the AI service is unavailable or confidence is below the configured
-threshold, the system falls back to deterministic keyword-based search.
-This preserves the basic resource-discovery workflow without making the
-library dependent on an external AI service.
-
-\subsection{Record Onboarding Agent}
-
-The Record Onboarding Agent validates incoming student and catalog records
-before insertion. Student records are checked using exact Roll Number and
-email comparisons and, where necessary, fuzzy name similarity. Catalog
-records use Asset ID and ISBN checks together with title/publisher
-similarity.
-
-Potential duplicates are skipped and reported rather than silently deleted.
-The backend owns the database transaction, allowing the ingestion operation
-to remain atomic.
-
-\subsection{Library Monitoring Agent}
-
-The Library Monitoring Agent performs deterministic overdue processing. It
-identifies active loans whose due dates have passed, calculates the number
-of overdue days, and updates or creates corresponding fine records.
-
-The agent also creates entries in the notification queue so that overdue
-students can be informed through a later notification-delivery mechanism.
-
-A separate demand-analysis operation aggregates search-demand logs and
-compares demand categories with low-inventory books. This produces
-acquisition recommendations for library administrators.
-
-\subsection{Controlled AI and Safety Model}
-
-The prototype follows a strict separation between AI interpretation and
-database modification:
-
-\begin{itemize}[leftmargin=0.7cm]
-    \item LLM outputs are constrained to Pydantic schemas.
-    \item Database writes are performed by backend services.
-    \item SQLAlchemy parameterization is used instead of string-concatenated
-    SQL.
-    \item Financial calculations are deterministic and are not delegated to
-    the language model.
-    \item AI failure does not prevent conventional keyword search.
-    \item Potential onboarding duplicates are reported for review rather
-    than automatically removed.
 \end{itemize}
 
-\section{Prototype Workflow}
+The database design uses primary keys, foreign-key relationships, and
+indexes on frequently accessed fields. This supports efficient catalogue
+search, transaction lookup, overdue monitoring, and demand analysis.
 
-The main student workflow is:
+% ============================================================
+% LIBRARY INTELLIGENCE AGENT
+% ============================================================
 
-\begin{enumerate}[leftmargin=0.7cm]
-    \item Student submits a natural-language resource request.
-    \item The Library Intelligence Agent extracts the search intent and
-    relevant terms.
-    \item Backend services query the MySQL catalog using controlled,
-    parameterized operations.
-    \item Current issued copies are calculated from circulation records.
-    \item Results are ranked using relevance and availability information.
-    \item The search request and extracted category are logged for demand
-    analysis.
+\section{Library Intelligence Agent}
+
+The Library Intelligence Agent provides natural-language interaction with
+the library catalogue.
+
+Its responsibilities include:
+
+\begin{itemize}
+
+    \item interpreting natural-language resource requests,
+
+    \item extracting relevant keywords and categories,
+
+    \item searching library resources through controlled application APIs,
+
+    \item checking resource availability,
+
+    \item providing availability-grounded recommendations,
+
+    \item answering common resource-related queries, and
+
+    \item logging unfulfilled searches for subsequent demand analysis.
+
+\end{itemize}
+
+The agent does not receive unrestricted access to the database. Database
+operations are exposed through controlled application APIs and tools.
+
+A conventional keyword-based search remains available as a fallback if the
+AI service is unavailable or if the extracted intent does not meet the
+required confidence threshold.
+
+% ============================================================
+% RECORD ONBOARDING AGENT
+% ============================================================
+
+\section{Record Onboarding Agent}
+
+The Record Onboarding Agent assists administrators with bulk student and
+member record imports.
+
+The onboarding workflow consists of:
+
+\begin{enumerate}
+
+    \item Receiving structured records.
+
+    \item Validating required fields and data types.
+
+    \item Checking roll numbers and unique identifiers.
+
+    \item Performing duplicate detection.
+
+    \item Flagging potential duplicate records for review.
+
+    \item Inserting validated records through controlled backend
+    operations.
+
+    \item Generating an import summary.
+
 \end{enumerate}
 
-The administrator workflow similarly combines deterministic monitoring with
-analytical assistance:
+Potential duplicate records are flagged for review rather than being
+automatically deleted.
 
-\begin{enumerate}[leftmargin=0.7cm]
-    \item Overdue loans are identified from circulation records.
-    \item Late days and fines are calculated deterministically.
-    \item Fine records and notification entries are created or updated.
-    \item Search-demand logs are aggregated by category.
-    \item Categories with high demand and low inventory are surfaced as
-    acquisition recommendations.
+% ============================================================
+% LIBRARY MONITORING AGENT
+% ============================================================
+
+\section{Library Monitoring Agent}
+
+The Library Monitoring Agent provides scheduled monitoring and
+resource-management assistance.
+
+Its responsibilities include:
+
+\begin{itemize}
+
+    \item detecting resources approaching their due date,
+
+    \item detecting overdue resources,
+
+    \item calculating applicable overdue fines,
+
+    \item generating reminder and notification records,
+
+    \item analysing issue frequency and resource availability, and
+
+    \item identifying high-demand and low-availability resources for
+    purchase consideration.
+
+\end{itemize}
+
+Deterministic operations such as due-date comparison and fine calculation
+are performed by the backend and database rather than delegated to a
+language model.
+
+AI functionality is used where analysis, recommendation, or summarisation
+provides additional value.
+
+% ============================================================
+% AI SAFETY
+% ============================================================
+
+\section{AI Safety and Control}
+
+The AI layer is intentionally constrained.
+
+The agents do not receive unrestricted SQL access. Instead, database
+operations are exposed through predefined backend APIs and controlled
+tools.
+
+The following safeguards are incorporated:
+
+\begin{itemize}
+
+    \item parameterized database queries,
+
+    \item role-based authorization,
+
+    \item structured AI outputs,
+
+    \item controlled tool invocation,
+
+    \item deterministic handling of financial and circulation operations,
+
+    \item backend validation before database modification, and
+
+    \item conventional search fallback when AI services are unavailable.
+
+\end{itemize}
+
+% ============================================================
+% CI/CD
+% ============================================================
+
+\section{CI/CD and Deployment}
+
+The development process incorporates continuous integration and continuous
+delivery practices.
+
+The CI pipeline is intended to:
+
+\begin{enumerate}
+
+    \item install project dependencies,
+
+    \item perform linting and static checks,
+
+    \item execute automated tests,
+
+    \item validate the application build, and
+
+    \item deploy successful builds to the configured environment.
+
 \end{enumerate}
 
-% =====================================================
-% CHAPTER 3
-% =====================================================
+This allows each development increment to be independently tested and
+reduces the risk of integration failures during later development stages.
 
-\chapter{Results and Evaluation}
+% ============================================================
+% CHAPTER 3: PROTOTYPE IMPLEMENTATION AND EVALUATION
+% ============================================================
 
-\section{Prototype Implementation Status}
+\chapter{Prototype Implementation and Evaluation}
 
-The prototype implementation is organized around the incremental delivery
-strategy established in the proposal. The current implementation baseline
-contains the following major components:
+\section{Prototype Implementation}
 
-\begin{table}[H]
-\centering
-\begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}p{4.2cm} X}
-\toprule
-\textbf{Component} & \textbf{Prototype Capability} \\
-\midrule
-Database extension &
-Notification queue, search-demand logging, foreign keys, and performance-oriented indexes. \\
+The prototype establishes the major architectural components required by
+the project proposal.
 
-Backend API &
-FastAPI endpoints for intelligent search, ingestion, fines, and overdue monitoring. \\
+The implementation is organized into:
 
-Intelligent search &
-Structured natural-language interpretation with a deterministic keyword-search fallback. \\
+\begin{itemize}
 
-Record onboarding &
-Pydantic validation, duplicate checks, fuzzy similarity, and transactional insertion. \\
+    \item frontend web interface,
 
-Fine management &
-Real-time overdue-day calculation and outstanding-balance computation. \\
+    \item backend REST API layer,
 
-Monitoring &
-Automated overdue scanning, fine updates, and notification generation. \\
+    \item MySQL database,
 
-Demand analysis &
-Aggregation of search-demand categories against low-inventory catalog records. \\
+    \item controlled AI agent layer,
 
-Frontend &
-React/TypeScript dashboard with natural-language search, loan/fine tracking, and librarian monitoring views. \\
+    \item automated monitoring workflow, and
 
-Engineering controls &
-Parameterized database access, controlled AI output, modular services, and automated testing structure. \\
-\bottomrule
-\end{tabularx}
-\caption{Prototype implementation scope}
-\label{tab:prototype-status}
-\end{table}
+    \item testing and deployment infrastructure.
+
+\end{itemize}
+
+The system is designed so that conventional library operations remain
+functional independently of the AI layer.
+
+\section{Core Library Workflow}
+
+The primary student workflow consists of:
+
+\begin{enumerate}
+
+    \item Student authentication.
+
+    \item Resource search.
+
+    \item Availability verification.
+
+    \item Resource issue.
+
+    \item Due-date tracking.
+
+    \item Resource return.
+
+    \item Fine calculation where applicable.
+
+\end{enumerate}
+
+The administrator workflow additionally provides:
+
+\begin{enumerate}
+
+    \item Student/member management.
+
+    \item Resource management.
+
+    \item Bulk record onboarding.
+
+    \item Overdue monitoring.
+
+    \item Notification management.
+
+    \item Demand analysis.
+
+    \item Purchase recommendations.
+
+\end{enumerate}
+
+\section{Intelligent Resource Discovery Workflow}
+
+The intelligent-search workflow follows the sequence:
+
+\begin{enumerate}
+
+    \item The student submits a natural-language query.
+
+    \item The Library Intelligence Agent extracts the intent, keywords,
+    and category.
+
+    \item The backend performs controlled catalogue retrieval.
+
+    \item Resource availability is calculated using current transaction
+    data.
+
+    \item Relevant results are ranked and returned.
+
+    \item The search is logged for subsequent demand analysis where
+    appropriate.
+
+\end{enumerate}
+
+The AI layer assists with interpretation and recommendation, while actual
+availability information is retrieved from the database.
+
+\section{Record Onboarding Workflow}
+
+The bulk onboarding workflow is:
+
+\begin{enumerate}
+
+    \item The administrator uploads a structured batch of records.
+
+    \item The Record Onboarding Agent validates the records.
+
+    \item Duplicate and potentially duplicate records are identified.
+
+    \item Valid records are passed to the backend.
+
+    \item The backend executes insertion as a controlled transaction.
+
+    \item The system returns an import summary containing accepted and
+    skipped records.
+
+\end{enumerate}
+
+\section{Monitoring and Notification Workflow}
+
+The monitoring workflow periodically evaluates active issue records.
+
+For each active transaction:
+
+\begin{enumerate}
+
+    \item The system compares the current date with the due date.
+
+    \item Overdue transactions are identified.
+
+    \item Overdue days are calculated.
+
+    \item Applicable fine records are created or updated.
+
+    \item Notification records are inserted into the notification queue.
+
+    \item Demand information is subsequently analysed using search and
+    circulation records.
+
+\end{enumerate}
+
+% ============================================================
+% TESTING
+% ============================================================
 
 \section{Testing Methodology}
 
-The prototype evaluation follows multiple levels of testing.
+The prototype follows a layered testing approach.
 
 \subsection{Unit Testing}
 
-Individual components are tested independently. Examples include:
+Individual backend functions and AI-agent processing components are tested
+independently using controlled inputs and expected outputs.
 
-\begin{itemize}[leftmargin=0.7cm]
-    \item validation of student records,
-    \item rejection of invalid academic-year values,
-    \item natural-language fallback parsing,
-    \item overdue-day calculation, and
-    \item deterministic fine calculation.
+Particular attention is given to:
+
+\begin{itemize}
+
+    \item input validation,
+
+    \item intent extraction,
+
+    \item database query functions,
+
+    \item availability calculation,
+
+    \item fine calculation, and
+
+    \item duplicate detection.
+
 \end{itemize}
 
 \subsection{Integration Testing}
 
-Integration tests verify that API routes, service classes, database models,
-and agent outputs work together. Important integration scenarios include
-intelligent search followed by demand logging, bulk ingestion followed by
-duplicate detection, and overdue monitoring followed by fine and
-notification creation.
+Integration tests verify interactions between the frontend, backend APIs,
+database, and controlled AI layer.
+
+Representative workflows include:
+
+\begin{itemize}
+
+    \item natural-language search to catalogue retrieval,
+
+    \item resource selection to issue transaction,
+
+    \item bulk onboarding to database insertion, and
+
+    \item overdue detection to notification generation.
+
+\end{itemize}
 
 \subsection{Performance Testing}
 
-Database indexes, pagination-oriented queries, and API response times are
-evaluated against the proposal's performance objectives. The primary
-engineering target is to keep common API operations within the proposed
-response-time budget while maintaining correctness.
+Performance testing measures API response times and resource-discovery
+latency under controlled test conditions.
+
+The database is evaluated for common catalogue and circulation queries,
+with indexing and pagination used to support response-time requirements.
 
 \subsection{Functional Testing}
 
-Representative library scenarios are used to validate:
+Functional testing verifies that the principal student and administrator
+workflows behave according to their expected requirements.
 
-\begin{enumerate}[leftmargin=0.7cm]
-    \item resource search with a natural-language request,
-    \item availability-aware search,
-    \item duplicate student ingestion,
-    \item duplicate catalog ingestion,
-    \item active overdue loans,
-    \item fine calculation,
-    \item notification generation, and
-    \item high-demand/low-availability detection.
-\end{enumerate}
+% ============================================================
+% EVALUATION CRITERIA
+% ============================================================
 
-\section{Evaluation Metrics}
+\section{Evaluation Criteria}
 
-The proposal defines measurable targets for the complete system. At the
-prototype stage, these metrics are treated as evaluation criteria rather
-than as claims of achieved performance.
+The prototype is evaluated using measurable workflow, accuracy,
+performance, and reliability criteria.
+
+\subsection{Primary Metrics}
 
 \begin{table}[H]
 \centering
-\begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}p{5.1cm} >{\centering\arraybackslash}p{3cm} X}
+\caption{Primary Prototype Evaluation Metrics}
+\label{tab:primarymetrics}
+
+\begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}p{3.5cm}
+                              X
+                              >{\centering\arraybackslash}p{2.5cm}}
 \toprule
-\textbf{Metric} & \textbf{Target} & \textbf{Prototype Evaluation Status} \\
+\textbf{Metric} & \textbf{Measurement} & \textbf{Target} \\
 \midrule
-Resource discovery time & $\leq 10$ s &
-To be measured using predefined resource queries. \\
 
-Duplicate detection precision & $\geq 90\%$ &
-To be measured using a labeled duplicate/non-duplicate dataset. \\
+Resource discovery time &
+Time required to locate a requested or suitable available resource for
+predefined queries &
+$\leq 10$ seconds \\
 
-Overdue detection coverage & $\geq 99\%$ &
-To be measured against controlled overdue scenarios. \\
+Duplicate detection precision &
+Proportion of records flagged as duplicates that are actual duplicates
+in a labelled dataset &
+$\geq 90\%$ \\
 
-Demand recommendation accuracy & $\geq 90\%$ &
-To be measured against labeled or synthetic demand cases. \\
+Overdue detection coverage &
+Proportion of known overdue transactions correctly detected &
+$\geq 99\%$ \\
 
-Median API response time & $\leq 500$ ms &
-To be measured under representative database load. \\
+Demand recommendation accuracy &
+Proportion of high-demand and low-availability resources correctly
+identified according to predefined thresholds &
+$\geq 90\%$ \\
 
-AI answer validity & $\geq 90\%$ &
-To be evaluated against grounded catalog responses. \\
-
-Automated test coverage & $\geq 70\%$ &
-To be measured from the completed test suite. \\
-
-Deployment availability & $\geq 99\%$ &
-To be evaluated after deployment and monitoring are established. \\
 \bottomrule
 \end{tabularx}
-\caption{Prototype and final-system evaluation criteria}
-\label{tab:evaluation}
 \end{table}
 
-No numerical performance result is claimed here without measurement. The
-purpose of the prototype stage is to establish the mechanisms needed to
-collect reproducible measurements during subsequent evaluation.
+\subsection{Secondary Metrics}
+
+\begin{table}[H]
+\centering
+\caption{Secondary Prototype Evaluation Metrics}
+\label{tab:secondarymetrics}
+
+\begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}p{3.5cm}
+                              X
+                              >{\centering\arraybackslash}p{2.5cm}}
+\toprule
+\textbf{Metric} & \textbf{Measurement} & \textbf{Target} \\
+\midrule
+
+API response time &
+Median response time for common non-AI application requests &
+$\leq 500$ ms \\
+
+AI answer validity &
+Proportion of predefined library questions answered consistently with
+database information &
+$\geq 90\%$ \\
+
+Notification delay &
+Time between an overdue condition becoming eligible and generation of
+its notification &
+Measured experimentally \\
+
+System reliability &
+Availability of the deployed application during the evaluation period &
+$\geq 99\%$ \\
+
+Test coverage &
+Percentage of critical backend logic covered by automated tests &
+$\geq 70\%$ \\
+
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\section{Validation Strategy}
+
+The evaluation uses controlled datasets and predefined scenarios.
+
+For resource discovery, conventional search can be compared with
+natural-language interaction by measuring the time required to locate
+resources.
+
+For onboarding, a labelled dataset containing valid, invalid, and
+duplicate records can be used to evaluate duplicate-detection precision.
+
+For monitoring, synthetic borrowing records with known due dates and
+overdue states can be used to measure detection coverage and notification
+latency.
+
+For demand analysis, historical or synthetic issue records can be used to
+define high-demand resources according to predetermined thresholds. The
+resulting recommendations can then be compared against expected labels.
 
 \section{Analysis}
 
-The prototype architecture provides several engineering benefits.
+The prototype is evaluated primarily on functional correctness,
+integration, reliability, and measurable performance rather than on
+novelty of the underlying AI models.
 
-First, deterministic library operations remain independent of the AI
-service. This is particularly important for fines, overdue status,
-circulation transactions, and database writes because these operations
-require predictable and auditable behavior.
+The architecture provides a clear separation between deterministic
+operations and AI-assisted operations. This reduces the risk of
+hallucinated or inconsistent information affecting critical library
+transactions.
 
-Second, the AI layer is constrained to structured interpretation and
-analysis. This reduces the risk of hallucinated resource information being
-treated as authoritative database data.
+The principal engineering challenge is integrating AI-assisted features
+without making the core system dependent on an external AI service.
+Maintaining conventional search and deterministic backend workflows as
+fallbacks addresses this concern.
 
-Third, the keyword-search fallback preserves basic functionality when the
-AI service is unavailable or produces a low-confidence interpretation. This
-supports the proposal's requirement that the project remain practically
-usable rather than depending entirely on an external model.
+The evaluation targets provide a basis for measuring whether the prototype
+meets the intended software-engineering objectives. Actual achieved values
+should be recorded after executing the corresponding controlled test
+datasets and performance experiments.
 
-Finally, the search-demand logging mechanism creates a feedback loop between
-student behavior and administrative decision support. Repeated searches can
-be analyzed together with inventory levels to identify potential acquisition
-needs.
+% ============================================================
+% CHAPTER 4: SCALABILITY
+% ============================================================
 
-% =====================================================
-% CHAPTER 4
-% =====================================================
+\chapter{Scalability and Deployment}
+
+\section{Scalability}
+
+The system is designed to scale in both theoretical and practical terms.
+
+\subsection{Logical Scalability}
+
+\begin{itemize}
+
+    \item Frontend and backend responsibilities are separated.
+
+    \item Backend APIs are designed to be stateless where practical.
+
+    \item Database queries use indexing and pagination for frequently
+    accessed records.
+
+    \item AI agents are modular and can be extended or replaced without
+    rewriting the complete application.
+
+\end{itemize}
+
+\subsection{Operational Deployability}
+
+\begin{itemize}
+
+    \item The application can be containerized using Docker.
+
+    \item A managed relational database can be used for deployment.
+
+    \item CI/CD supports repeatable staging and production deployments.
+
+    \item The architecture can support a larger number of users and
+    records without requiring a fundamental redesign.
+
+\end{itemize}
+
+\section{Engine Availability}
+
+The project relies on mature and readily available software engines rather
+than requiring fundamental algorithmic research.
+
+The required engineering components include:
+
+\begin{itemize}
+
+    \item a modern web framework for frontend and backend development,
+
+    \item REST API infrastructure for application integration,
+
+    \item MySQL or another managed relational database,
+
+    \item authentication and role-based authorization libraries,
+
+    \item mature LLM or AI APIs and supporting agent frameworks,
+
+    \item automated testing frameworks,
+
+    \item GitHub Actions or an equivalent CI runner, and
+
+    \item Docker and a platform-hosted or cloud deployment target.
+
+\end{itemize}
+
+\section{Deployment Strategy}
+
+The deployment strategy follows the project's incremental development
+approach.
+
+The application can first be deployed to a staging environment for
+validation. Successful builds can subsequently be promoted to the
+production environment through the CI/CD pipeline.
+
+The separation between frontend, backend, database, and AI components
+allows individual services to be scaled according to workload.
+
+% ============================================================
+% RISKS AND MITIGATIONS
+% ============================================================
+
+\section{Risks and Mitigations}
+
+\begin{itemize}
+
+    \item \textbf{AI hallucination or incorrect resource information:}
+    AI responses are grounded in current database records through
+    controlled retrieval tools and predefined APIs.
+
+    \item \textbf{Excessive project scope:}
+    The core library workflow is completed before AI features are added,
+    and later functionality is delivered incrementally.
+
+    \item \textbf{Duplicate detection errors:}
+    Potential duplicates are flagged for human review instead of being
+    automatically deleted.
+
+    \item \textbf{AI service unavailability:}
+    Conventional keyword-based resource search remains available as a
+    fallback.
+
+    \item \textbf{Unauthorized automated actions:}
+    Agents operate through role-controlled APIs, and irreversible
+    operations require explicit backend authorization.
+
+    \item \textbf{Insufficient evaluation data:}
+    Synthetic and labelled library datasets can be prepared so that
+    evaluation does not depend entirely on live institutional data.
+
+    \item \textbf{Deployment instability:}
+    A staging environment and CI/CD pipeline make deployments repeatable.
+
+    \item \textbf{Database performance degradation:}
+    Frequently accessed fields are indexed and database operations use
+    pagination and optimized queries.
+
+\end{itemize}
+
+% ============================================================
+% CHAPTER 5: CONCLUSION
+% ============================================================
 
 \chapter{Conclusion}
 
 \section{Summary of Work}
 
-The prototype establishes the engineering foundation for the
-AI-Enabled Smart Library Management and Resource Recommendation System.
-The design integrates a React/TypeScript frontend, FastAPI backend, MySQL
-database, and controlled multi-agent AI layer.
+The prototype establishes the foundation of an AI-enabled Smart Library
+Management System that combines conventional library workflows with
+controlled AI-assisted functionality.
 
-The implementation is organized into separate services for intelligent
-resource discovery, record onboarding, circulation/fine handling, overdue
-monitoring, and demand analysis. The database design extends the core
-library schema with notification and search-demand logging capabilities.
+The system addresses four principal areas:
 
-The prototype follows the project's time-to-value strategy by prioritizing
-working library workflows and then adding AI-assisted functionality in
-modular increments.
+\begin{enumerate}
+
+    \item resource discovery,
+
+    \item student/member record onboarding,
+
+    \item overdue and notification management, and
+
+    \item resource demand analysis.
+
+\end{enumerate}
+
+The architecture separates the frontend, backend, database, and AI agent
+layers, allowing individual components to be developed and tested
+independently.
 
 \section{Key Findings}
 
-\begin{itemize}[leftmargin=0.7cm]
-    \item \textbf{AI should assist rather than control deterministic
-    workflows:} Search interpretation and analytical recommendations benefit
-    from AI, while fines, due dates, and database transactions should remain
-    under deterministic backend control.
+The prototype demonstrates how AI can be incorporated into a conventional
+software system without allowing the AI layer to directly control critical
+database operations.
 
-    \item \textbf{Fallback behavior is essential:} Keyword-based search
-    provides continued resource discovery when the AI service is unavailable
-    or uncertain.
+The appropriate separation of responsibilities is:
 
-    \item \textbf{Demand logging adds operational value:} Search activity
-    can be transformed into a measurable input for high-demand,
-    low-availability analysis.
+\begin{itemize}
 
-    \item \textbf{Modular architecture supports incremental development:}
-    The separation of agents, backend services, database models, and frontend
-    components allows additional functionality to be introduced without
-    redesigning the complete system.
+    \item \textbf{Deterministic backend/database operations:}
+    availability calculation, issue and return transactions, due-date
+    comparison, and fine calculation.
+
+    \item \textbf{AI-assisted operations:}
+    natural-language interpretation, resource recommendation,
+    duplicate-detection assistance, demand analysis, and summarisation.
+
 \end{itemize}
+
+This separation improves reliability while still providing useful
+AI-assisted interaction.
 
 \section{Future Work and Recommendations}
 
-The following work is planned for subsequent iterations:
+Future development can extend the prototype through:
 
-\begin{enumerate}[leftmargin=0.7cm]
-    \item Complete and validate the full student and administrator
-    authentication and role-based access-control workflow.
-    \item Expand natural-language recommendations using availability-aware
-    retrieval and richer catalog metadata.
-    \item Complete bulk student and catalog onboarding with CSV ingestion,
-    review workflows, and larger duplicate-detection evaluation datasets.
-    \item Integrate notification delivery for queued overdue messages.
-    \item Extend demand analysis into administrator dashboards and
-    purchase-priority reports.
-    \item Conduct controlled performance testing to measure the proposed
-    response-time and reliability targets.
-    \item Increase automated unit and integration test coverage and integrate
-    the test suite into CI/CD.
-    \item Containerize the system and validate deployment in a staging
-    environment before final production deployment.
+\begin{enumerate}
+
+    \item improved semantic and vector-based resource search,
+
+    \item more advanced recommendation ranking,
+
+    \item improved duplicate-detection and entity-resolution methods,
+
+    \item richer librarian analytics,
+
+    \item improved demand forecasting,
+
+    \item automated notification delivery,
+
+    \item support for additional resource types beyond books,
+
+    \item stronger authentication and role-management mechanisms, and
+
+    \item deployment under a production cloud environment.
+
 \end{enumerate}
 
 \section{Final Remarks}
 
-The prototype demonstrates the intended engineering direction of the project:
-a practical library-management platform enhanced by carefully controlled AI
-rather than an AI research system. The architecture emphasizes rapid
-incremental delivery, measurable evaluation, reliable database operations,
-fallback behavior, and future scalability.
+The project follows the software-engineering objective of delivering
+practical value through incremental development rather than attempting to
+solve an open-ended AI research problem.
 
-The next development stages will focus on integrating the individual
-components into a complete end-to-end workflow and collecting quantitative
-evaluation results. These measurements will determine whether the system
-meets the targets defined in the project proposal.
+The prototype provides a foundation for a deployable library-management
+platform in which conventional software handles critical deterministic
+operations and controlled AI agents provide natural-language interaction,
+automation, and decision support.
+
+The system can therefore be evaluated using measurable criteria covering
+functionality, accuracy, performance, reliability, and scalability.
 
 \end{document}
