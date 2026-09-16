@@ -1,10 +1,10 @@
-# 📚 AI-Enabled Smart Library Management and Resource Recommendation System
+# AI-Enabled Smart Library Management and Resource Recommendation System
 
 > **UCS503P — Software Engineering Project**  
 > Thapar Institute of Engineering and Technology, Patiala
 
-[![Project Status](https://img.shields.io/badge/Status-Prototype-blue)](https://github.com/zzzelicrem/SE_AI-EnabledSmartLibraryManagementSystem)
-[![Course](https://img.shields.io/badge/Course-UCS503P-orange)](https://github.com/zzzelicrem/SE_AI-EnabledSmartLibraryManagementSystem)
+[![Project Status](https://img.shields.io/badge/Status-Prototype-blue)](https://github.com/AKS1110/SE_AI-EnabledSmartLibraryManagementSystem)
+[![Course](https://img.shields.io/badge/Course-UCS503P-orange)](https://github.com/AKS1110/SE_AI-EnabledSmartLibraryManagementSystem)
 [![Python](https://img.shields.io/badge/Python-3.11%2B-blue)](https://www.python.org/)
 [![MySQL](https://img.shields.io/badge/Database-MySQL-4479A1)](https://www.mysql.com/)
 [![React](https://img.shields.io/badge/Frontend-React-61DAFB)](https://react.dev/)
@@ -12,7 +12,7 @@
 
 ---
 
-## 👥 Team
+## Team
 
 | Roll No. | Name | Role |
 |----------|------|------|
@@ -27,26 +27,26 @@
 
 ---
 
-## 🧠 Project Overview
+## Project Overview
 
 The **AI-Enabled Smart Library Management and Resource Recommendation System** is a web-based platform that combines conventional library management workflows with controlled AI-assisted functionality.
 
 The system provides:
 
-- 📚 Book and resource management
-- 👨‍🎓 Student/member management
-- 🔄 Issue and return management
-- ⏰ Overdue monitoring
-- 💰 Fine tracking
-- 🔎 Natural-language resource discovery
-- 🔔 Automated notifications
-- 📊 Library analytics and recommendations
+- Book and resource management
+- Student/member management
+- Issue and return management
+- Overdue monitoring
+- Fine tracking
+- Natural-language resource discovery
+- Automated notifications
+- Library analytics and recommendations
 
-The project follows a **modular 3-tier architecture** integrated with a controlled AI agent layer.
+The project follows a modular 3-tier architecture integrated with a controlled AI agent layer.
 
 ---
 
-## 🎯 Objectives
+## Objectives
 
 The project aims to:
 
@@ -62,7 +62,7 @@ The project aims to:
 
 ---
 
-## 🏗️ System Architecture
+## System Architecture
 
 ```text
                     ┌─────────────────────────┐
@@ -99,63 +99,49 @@ The project aims to:
                     │ Notifications           │
                     │ Search Logs             │
                     └─────────────────────────┘
-````
-
----
-
-## 🤖 AI Agent Layer
-
-### Library Intelligence Agent
+AI Agent Layer
+Library Intelligence Agent
 
 Handles natural-language resource discovery by:
 
-* Extracting search intent and keywords.
-* Identifying relevant categories.
-* Searching the library catalogue.
-* Checking resource availability.
-* Returning ranked recommendations.
-
-### Record Onboarding Agent
+Extracting search intent and keywords
+Identifying relevant categories
+Searching the library catalogue
+Checking resource availability
+Returning ranked recommendations
+Record Onboarding Agent
 
 Supports bulk record ingestion by:
 
-* Validating incoming records.
-* Checking required fields.
-* Detecting duplicate records.
-* Performing fuzzy matching.
-* Preparing valid records for controlled database insertion.
-
-### Library Monitoring Agent
+Validating incoming records
+Checking required fields
+Detecting duplicate records
+Performing fuzzy matching
+Preparing valid records for controlled database insertion
+Library Monitoring Agent
 
 Supports automated monitoring by:
 
-* Detecting overdue resources.
-* Calculating overdue fines.
-* Generating notification entries.
-* Monitoring library activity.
+Detecting overdue resources
+Calculating overdue fines
+Generating notification entries
+Monitoring library activity
 
 AI agents interact with the database only through controlled backend APIs and tools.
 
----
-
-## 🔐 Safety and Reliability
+Safety and Reliability
 
 The system separates AI-assisted functionality from deterministic database operations.
 
-* Parameterized database queries
-* Input validation using Pydantic
-* Controlled AI tool access
-* No unrestricted SQL access for AI agents
-* Transactional database operations
-* Error handling and validation
-* AI fallback to conventional keyword-based search
-* Automated testing and CI/CD
-
----
-
-## 📂 Repository Organization
-
-```text
+Parameterized database queries
+Input validation using Pydantic
+Controlled AI tool access
+No unrestricted SQL access for AI agents
+Transactional database operations
+Error handling and validation
+AI fallback to conventional keyword-based search
+Automated testing and CI/CD
+Repository Organization
 SE_AI-EnabledSmartLibraryManagementSystem/
 │
 ├── .github/
@@ -206,32 +192,21 @@ SE_AI-EnabledSmartLibraryManagementSystem/
 ├── README.md
 ├── Makefile
 └── LICENSE
-```
+Database
 
----
+The system uses MySQL as its relational database.
 
-## 🗄️ Database
-
-The system uses **MySQL** as its relational database.
-
-### Core Tables
-
-| Table                | Purpose                       |
-| -------------------- | ----------------------------- |
-| `STUDENTS`           | Student/member records        |
-| `EMPLOYEE`           | Library employee records      |
-| `ASSETS`             | Library asset records         |
-| `BOOKS`              | Book catalogue                |
-| `ISSUING_DETAILS`    | Issue and return transactions |
-| `FINES`              | Fine records                  |
-| `NOTIFICATION_QUEUE` | Notification management       |
-| `SEARCH_DEMAND_LOGS` | Search activity logging       |
-
----
-
-## 🔎 Intelligent Search
-
-```text
+Core Tables
+Table	Purpose
+STUDENTS	Student/member records
+EMPLOYEE	Library employee records
+ASSETS	Library asset records
+BOOKS	Book catalogue
+ISSUING_DETAILS	Issue and return transactions
+FINES	Fine records
+NOTIFICATION_QUEUE	Notification management
+SEARCH_DEMAND_LOGS	Search activity logging
+Intelligent Search
 Natural-Language Query
           │
           ▼
@@ -251,15 +226,10 @@ Availability Check
           │
           ▼
 Ranked Recommendations
-```
 
 The system uses current circulation data to provide availability-aware results.
 
----
-
-## ⏰ Overdue Monitoring
-
-```text
+Overdue Monitoring
 ISSUING_DETAILS
        │
        ▼
@@ -276,87 +246,54 @@ FINES
        │
        ▼
 Notification Queue
-```
 
-Overdue detection and fine calculation are handled through deterministic backend/database logic.
+Overdue detection and fine calculation are handled through deterministic backend and database logic.
 
----
+System Diagrams
+Use Case Diagram
 
-## 📐 System Diagrams
+Level 0 — Context DFD
 
-### Use Case Diagram
+Level 1 — System DFD
 
-![Use Case Diagram](docs/Diagrams/Use%20Case%20Diagram.png)
+Level 2 — Intelligent Search DFD
 
-### Level 0 — Context DFD
+Entity Relationship Diagram
 
-![Level 0 DFD](docs/Diagrams/DFD_Level0.png)
+Activity / Swimlane Diagram
 
-### Level 1 — System DFD
-
-![Level 1 DFD](docs/Diagrams/DFD_Level1.png)
-
-### Level 2 — Intelligent Search DFD
-
-![Level 2 DFD](docs/Diagrams/Level_2_DFD.png)
-
-### Entity Relationship Diagram
-
-![ER Diagram](docs/Diagrams/ER_Diagram.png)
-
-### Activity / Swimlane Diagram
-
-![Swimlane Diagram](docs/Diagrams/SwimLane_Diagram.png)
-
----
-
-## 🌐 API Endpoints
-
-| Method | Endpoint                              | Purpose                          |
-| ------ | ------------------------------------- | -------------------------------- |
-| `POST` | `/api/search/intelligent`             | Natural-language resource search |
-| `POST` | `/api/ingestion/sync`                 | Bulk record ingestion            |
-| `GET`  | `/api/circulation/fines/{student_id}` | Student fine information         |
-| `POST` | `/api/cron/monitor-overdues`          | Overdue monitoring               |
-
----
-
-## 🧪 Evaluation
+API Endpoints
+Method	Endpoint	Purpose
+POST	/api/search/intelligent	Natural-language resource search
+POST	/api/ingestion/sync	Bulk record ingestion
+GET	/api/circulation/fines/{student_id}	Student fine information
+POST	/api/cron/monitor-overdues	Overdue monitoring
+Evaluation
 
 The prototype is evaluated using measurable software engineering criteria.
 
-| Metric                        |       Target |
-| ----------------------------- | -----------: |
-| Resource discovery time       | ≤ 10 seconds |
-| Duplicate detection precision |        ≥ 90% |
-| Overdue detection coverage    |        ≥ 99% |
-| Recommendation accuracy       |        ≥ 90% |
-| API median response time      |     ≤ 500 ms |
-| Automated test coverage       |        ≥ 70% |
-
----
-
-## 🛠️ Technology Stack
-
-| Component       | Technology               |
-| --------------- | ------------------------ |
-| Frontend        | React                    |
-| Backend         | FastAPI / Python 3.11+   |
-| Database        | MySQL                    |
-| AI              | LangChain / OpenAI API   |
-| Validation      | Pydantic                 |
-| API             | REST                     |
-| Testing         | Python Testing Framework |
-| Version Control | Git / GitHub             |
-| CI/CD           | GitHub Actions           |
-
----
-
-## 🚀 Development Approach
+Metric	Target
+Resource discovery time	≤ 10 seconds
+Duplicate detection precision	≥ 90%
+Overdue detection coverage	≥ 99%
+Recommendation accuracy	≥ 90%
+API median response time	≤ 500 ms
+Automated test coverage	≥ 70%
+Technology Stack
+Component	Technology
+Frontend	React
+Backend	FastAPI / Python 3.11+
+Database	MySQL
+AI	LangChain / OpenAI API
+Validation	Pydantic
+API	REST
+Testing	Python Testing Framework
+Version Control	Git / GitHub
+CI/CD	GitHub Actions
+Development Approach
 
 The project follows an incremental software engineering approach:
 
-```text
 Requirements
      ↓
 Core MVP
@@ -372,52 +309,42 @@ Testing
 Evaluation
      ↓
 Deployment
-```
 
 The development process emphasizes rapid time-to-value, incremental implementation, continuous integration, testing, and measurable evaluation.
 
----
+Project Status
 
-## 📌 Project Status
-
-**Status: Prototype**
+Status: Prototype
 
 The current prototype establishes the system architecture, database design, core workflows, AI-agent design, system diagrams, and project documentation.
 
----
-
-## 📄 Documentation
+Documentation
 
 Project documentation includes:
 
-* Project Proposal
-* Prototype Report
-* Final Project Report
-* System Architecture
-* Use Case Diagram
-* Data Flow Diagrams
-* ER Diagram
-* Activity/Swimlane Diagram
-* Database Design
-* Development Journals
+Project Proposal
+Prototype Report
+Final Project Report
+System Architecture
+Use Case Diagram
+Data Flow Diagrams
+ER Diagram
+Activity/Swimlane Diagram
+Database Design
+Development Journals
+Team
 
----
-
-## 👨‍💻 Team
-
-**Arnav Agarwal** — 1024160010
+Arnav Agarwal — 1024160010
 Primary Author
 
-**Aradhya Goyal** — 1024160135
+Aradhya Goyal — 1024160135
 Team Member
 
-**Amanjot Kaur Sidhu** — 1024160025
+Amanjot Kaur Sidhu — 1024160025
 Team Member
 
-**Lab Instructor:** Dr. Jeelani Asif
-
----
+Lab Instructor: Dr. Jeelani Asif
 
 © 2026 Arnav Agarwal, Aradhya Goyal, and Amanjot Kaur Sidhu
-**UCS503P — Software Engineering Project**
-**Thapar Institute of Engineering and Technology, Patiala**
+UCS503P — Software Engineering Project
+Thapar Institute of Engineering and Technology, Patiala
