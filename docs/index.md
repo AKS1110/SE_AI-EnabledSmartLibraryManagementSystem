@@ -99,9 +99,14 @@ The project aims to:
                     │ Notifications           │
                     │ Search Logs             │
                     └─────────────────────────┘
+
+
 ````
 
+
 ---
+
+
 
 ## 🤖 AI Agent Layer
 
