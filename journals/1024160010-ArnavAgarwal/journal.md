@@ -79,3 +79,53 @@ Finalized a highly detailed, engineering-focused project proposal with clear wor
 
 ### What I Learned
 Refining a broad idea into a constrained, domain-specific application (like a Smart Library) dramatically improves implementation feasibility and allows for quantifiable evaluation metrics.
+
+
+---
+
+## Week 5 (Aug 31 – Sep 6): GitHub Pages Documentation & Repository Setup
+
+### Objective
+Set up the project's online documentation and improve the repository structure and presentation through GitHub Pages.
+
+### Work Done
+* **MkDocs Configuration:** Worked on the MkDocs configuration to establish the project's documentation website and configure the Material theme, navigation, repository information, and documentation features.
+* **Documentation Website:** Created and refined the `index.md` file to provide a concise overview of the project, including its objectives, architecture, AI agent layer, database design, API endpoints, evaluation criteria, technology stack, and development approach.
+* **System Documentation:** Added project architecture, intelligent search workflow, overdue monitoring workflow, repository structure, and system diagrams to the online documentation.
+* **README Documentation:** Created and organized the project's `README.md` file to provide a concise overview of the project, its architecture, technologies, system components, diagrams, APIs, evaluation metrics, and development status.
+* **GitHub Pages Deployment:** Configured the repository for automatic documentation deployment through GitHub Pages.
+* **GitHub Actions:** Enabled and configured the required GitHub repository Actions settings so that the documentation could be automatically built and deployed whenever changes were pushed to the repository.
+* **Documentation Refinement:** Fixed Markdown formatting, code-block rendering, documentation structure, and diagram paths to ensure the project documentation was presented correctly online.
+
+### Outcome
+Established a functional GitHub Pages documentation workflow with a structured `index.md`, project README, MkDocs configuration, and automated deployment through GitHub Actions.
+
+### What I Learned
+Learned how documentation can be treated as part of the software engineering workflow rather than as a separate final deliverable. I also gained practical experience with MkDocs, GitHub Pages, Markdown documentation, repository configuration, and CI-based documentation deployment.
+
+---
+
+## Week 6 (Sep 7 – Sep 13): Prototype Report & System Documentation
+
+### Objective
+Develop the first formal prototype report in LaTeX based on the project proposal and document the implemented prototype architecture, workflows, and system design.
+
+### Work Done
+* **Prototype Report Development:** Prepared the first prototype report in LaTeX using the provided UCS503P report format and structure as the reference.
+* **Report Structure:** Organized the report into sections covering the project background, problem statement, objectives, methodology, system architecture, system design, prototype implementation, evaluation criteria, scalability, and conclusions.
+* **Project-Specific Formatting:** Adapted the report template to the Smart Library Management and Resource Recommendation System while maintaining the required academic report structure.
+* **System Diagrams:** Integrated the project's Use Case Diagram and Data Flow Diagrams into the prototype report.
+* **DFD Integration:** Added and corrected the Level 0, Level 1, and Level 2 DFD sections, including the corresponding diagram files and captions.
+* **Database Design Documentation:** Added the Entity Relationship Diagram to document the relationships between students, employees, assets, books, issuing details, fines, notifications, and search-related records.
+* **Activity / Swimlane Diagram:** Added an Activity/Swimlane Diagram to represent the workflow between the student, web interface, backend application, Library Intelligence Agent, MySQL database, and librarian/notification components.
+* **Prototype Workflow Documentation:** Documented the core workflows for intelligent resource discovery, record onboarding, and library monitoring and notification.
+* **AI Agent Documentation:** Documented the roles and controlled interaction of the Library Intelligence Agent, Record Onboarding Agent, and Library Monitoring Agent.
+* **Evaluation Documentation:** Incorporated measurable prototype evaluation criteria covering resource discovery time, duplicate detection precision, overdue detection coverage, recommendation accuracy, API response time, and test coverage.
+* **LaTeX Debugging:** Resolved diagram file-path and filename issues during compilation and verified that the required figures were correctly referenced from the report.
+* **Report Refinement:** Improved the title page, author information, section organization, figure placement, captions, and overall consistency of the prototype report.
+
+### Outcome
+Completed the first structured prototype report containing the project's system architecture, implementation approach, system diagrams, database design, AI-agent workflows, evaluation criteria, and prototype documentation.
+
+### What I Learned
+Learned how to convert a software project's evolving implementation and design into a formal technical report. I also gained experience with LaTeX-based academic documentation, figure management, report formatting, and resolving compilation issues involving external diagram files.
