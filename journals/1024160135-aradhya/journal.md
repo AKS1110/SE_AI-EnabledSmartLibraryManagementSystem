@@ -27,3 +27,10 @@
 * **Level 2 DFD (Process 1.0)**: Decomposed `Search & Intelligent Assistance` into modular sub-processes (`1.1 Parse Query`, `1.2 Query Catalog`, `1.3 Generate Recommendations`) structured to support both chatbot and agent search flows.
 
 ---
+
+## Week 5 (Aug 31 – Sep 6): Feature Brainstorming & Gantt Chart Scheduling
+
+* **Dual Search Mechanism Ideation**: Brainstormed and finalized the separation of search workflows into two distinct modalities: a normal database search bar for direct catalog queries, and a semantic recommendation engine driven by the Campus Intelligence Agent.
+* **Master Schedule & Gantt Tracking**: Developed the project Gantt chart schedule, mapping out comprehensive task breakdowns, phases, and overlapping timelines from project inception through system architecture design.
+
+---
