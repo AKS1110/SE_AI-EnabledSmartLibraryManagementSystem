@@ -39,3 +39,22 @@
 - Generated and deployed the website to the **`gh-pages` branch**.
 - Configured **GitHub Pages** to serve the website from the `gh-pages` branch.
 - Resolved **MkDocs configuration and deployment issues**.
+
+  ## Week 6 (Sep 7 – Sep 13): Frontend Prototype Development
+
+* Started developing the **frontend prototype** for the AI-enabled smart library management system.
+* Created the basic **student dashboard** with library-related features.
+* Added components for **search, loan tracking, notifications, and AI assistance**.
+* Integrated **mock data** to demonstrate frontend functionality.
+* Reviewed the frontend structure according to the **Use Case Diagram and DFDs**.
+* Discussed the required **entities, attributes, and assets** for the database.
+
+## Week 7 (Sep 14 – Sep 16): Database & Prototype Development
+
+* Continued working on the **frontend prototype** and fixed frontend issues.
+* Added and tested **student-specific mock loan data**.
+* Started working on the **SQL database** for the project.
+* Reviewed the existing database structure and discussed the required **library assets and entities**.
+* Started planning the **frontend–database integration** for the working prototype.
+* Continued preparing the prototype for **backend and AI feature integration**.
+
