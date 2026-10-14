@@ -16,7 +16,7 @@
 
 | Roll No. | Name | Role |
 |----------|------|------|
-| **1024160010** | **Arnav Agarwal** | Primary Author |
+| **1024160010** | **Arnav Agarwal** | Team Member |
 | **1024160135** | **Aradhya Goyal** | Team Member |
 | **1024160025** | **Amanjot Kaur Sidhu** | Team Member |
 
