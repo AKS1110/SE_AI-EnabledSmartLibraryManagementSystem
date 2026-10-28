@@ -58,3 +58,16 @@
 * Started planning the **frontend–database integration** for the working prototype.
 * Continued preparing the prototype for **backend and AI feature integration**.
 
+## Week 8 (Oct 4 – Oct 10): Database Development & Frontend Refinement
+
+* **Database Schema Development**: Reviewed and refined the database structure for Books, Students, and Issuing Details to support core library management operations.
+* **Frontend Refinement**: Improved the existing student dashboard and reviewed the Search Panel, Loan Tracker, and Notification Center components.
+
+---
+
+## Week 9 (Oct 11 – Oct 16): System Refinement, UML Class Diagram & Integration Planning
+
+* **Database Structure Review**: Continued reviewing the database schema and relationships between library management entities.
+* **UML Class Diagram Development**: Created the UML Class Diagram using Draw.io to represent the system's classes, attributes, methods, and relationships.
+* **Backend Architecture Planning**: Reviewed the planned communication between the React frontend, FastAPI backend, and MySQL database.
+
