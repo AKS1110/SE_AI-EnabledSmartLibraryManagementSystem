@@ -34,3 +34,9 @@
 * **Master Schedule & Gantt Tracking**: Developed the project Gantt chart schedule, mapping out comprehensive task breakdowns, phases, and overlapping timelines from project inception through system architecture design.
 
 ---
+
+## Week 10 (Oct 12 – Oct 18): Entity-Relationship (ER) Diagram & Database Schema Modeling
+
+* **Core Entity & Table Mapping**: Designed and structured the persistent database schema, defining primary and foreign key constraints across `STUDENTS`, `EMPLOYEE`, `ASSETS`, `BOOKS`, `ISSUING_DETAILS`, `FINES`, `NOTIFICATION_QUEUE`, and `SEARCH_DEMAND_LOGS`.
+* **Relationship & Cardinality Auditing**: Corrected logical relationship errors from automated diagram generation, isolating `SEARCH_DEMAND_LOGS` as an independent student-linked audit table rather than an upstream parent of the notification queue.
+* **ER Diagram Refinement**: Polished the Chen-notation database schema to accurately represent strong entities, weak entities (`FINES`), and precise cardinality constraints across all library circulation workflows.
