@@ -71,3 +71,19 @@
 * Created the UML Class Diagram using Draw.io to represent the system's classes, attributes, methods, and relationships.
 * Reviewed the planned communication between the React frontend, FastAPI backend, and MySQL database.
 
+## Week 10 (Oct 17 – Oct 23): UML Design Refinement & System Workflow Analysis
+
+- Reviewed and refined the UML Class Diagram to ensure proper representation of system classes, attributes, methods, and associations.
+- Analysed the interactions between different system modules to identify the major workflows and communication sequences.
+- Discussed the sequence diagram structure with a teammate and identified the actors, objects, and message exchanges involved in key system operations.
+
+## Week 11 (Oct 24 – Oct 30): Sequence Diagram Development & Project Planning
+
+- Worked on developing the UML Sequence Diagram to illustrate the flow of interactions between users, frontend components, backend services, and the database.
+- Collaborated with a teammate to complete and review the Sequence Diagram, ensuring that the message flow and interaction order were correctly represented.
+- Reviewed the remaining project development activities and organised the tasks according to their implementation priorities.
+
+## Week 12 (Oct 31 – Nov 4): Gantt Chart Preparation & Development Phase Planning
+
+- Completed the project Gantt Chart by breaking down the upcoming development phase into detailed tasks, milestones, and estimated timelines.
+
