@@ -129,3 +129,125 @@ Completed the first structured prototype report containing the project's system 
 
 ### What I Learned
 Learned how to convert a software project's evolving implementation and design into a formal technical report. I also gained experience with LaTeX-based academic documentation, figure management, report formatting, and resolving compilation issues involving external diagram files.
+
+---
+
+## Week 7 (Oct 5 – Oct 11): Activity Diagram Design
+
+### Objective
+
+Design activity diagrams to represent the core workflows of the AI-Enabled Smart Library Management and Resource Recommendation System.
+
+### Work Done
+
+* **Workflow Identification:** Identified the major activities involved in library operations, including resource searching, issuing books, returning resources, and overdue monitoring.
+* **Activity Diagram Design:** Designed activity diagrams to represent the sequence of actions, decisions, and interactions involved in the core library management workflows.
+* **Workflow Representation:** Defined the responsibilities of students, the web interface, backend services, and database operations within the workflows.
+* **Diagram Refinement:** Reviewed the diagrams to ensure that decision points, alternate flows, and process transitions were represented clearly.
+
+### Outcome
+
+Completed the activity diagram design for the core library management workflows.
+
+### What I Learned
+
+Learned how activity diagrams represent the dynamic behaviour of a software system and help identify missing steps, decision points, and alternative execution paths before implementation.
+
+---
+
+## Week 8 (Oct 12 – Oct 18): UML Class and Sequence Diagram Design
+
+### Objective
+
+Develop UML class and sequence diagrams to describe the system's static structure and interactions between its components.
+
+### Work Done
+
+* **Class Identification:** Identified the major classes required for the library management system, including Student, Employee, Book, Asset, Issue, Fine, Notification, and the AI agent components.
+* **Class Diagram Design:** Defined class attributes, methods, and relationships, including associations, inheritance where applicable, and multiplicities.
+* **Sequence Diagram Planning:** Identified the participants involved in the major system workflows, including the Student, Web Interface, Backend REST API, Library Intelligence Agent, and MySQL Database.
+* **Interaction Modelling:** Started modelling the sequence of messages exchanged during intelligent searching, resource issuing, circulation, and return operations.
+
+### Outcome
+
+Completed the design of the UML class diagram and progressed with the sequence diagram representing the interactions between system components.
+
+### What I Learned
+
+Understood the difference between structural and behavioural UML diagrams. Class diagrams describe the organization of the system, while sequence diagrams explain how components communicate during execution.
+
+---
+
+## Week 9 (Oct 19 – Oct 25): Sequence Diagram, Frontend Development & ER Modelling
+
+### Objective
+
+Refine the UML sequence diagram, begin frontend implementation, and develop the database Entity Relationship Diagram.
+
+### Work Done
+
+* **Sequence Diagram Completion:** Completed the UML sequence diagram using the major processes identified in the Level 1 DFD.
+* **Process Representation:** Represented intelligent resource searching, resource issuing, overdue and fine tracking, and the resource return process.
+* **Notification Workflow Refinement:** Corrected the overdue notification workflow so that notifications are sent to the concerned student rather than the librarian. Removed the unnecessary notification-status update interaction from the sequence diagram.
+* **Frontend Development:** Started implementing the frontend interface and integrating the initial UI components with the planned application structure.
+* **ER Diagram Design:** Designed the Entity Relationship Diagram covering STUDENTS, EMPLOYEE, ASSETS, BOOKS, ISSUING_DETAILS, FINES, NOTIFICATION_QUEUE, and SEARCH_DEMAND_LOGS.
+* **Database Relationships:** Defined primary keys, foreign keys, attributes, cardinalities, and relationships between the entities.
+* **Database Normalisation:** Reviewed the entity structure to reduce unnecessary duplication and maintain data consistency.
+
+### Outcome
+
+Completed the UML sequence diagram and ER diagram design. Frontend development and component integration progressed to approximately 60%.
+
+### What I Learned
+
+Learned how database relationships and normalisation influence the reliability of application data. Also gained a better understanding of how sequence diagrams can be derived from DFD processes and refined to represent realistic system behaviour.
+
+---
+
+## Week 10 (Oct 26 – Nov 1): Database Design Finalisation & Frontend Integration
+
+### Objective
+
+Finalise the database entity-relationship design, continue frontend development, and prepare functional test cases for the system.
+
+### Work Done
+
+* **ER Diagram Refinement:** Reviewed the relationships between library entities and refined the ER diagram to maintain consistency with the project's database schema.
+* **Entity Relationship Validation:** Checked the relationships involving students, issue records, fines, notifications, and search logs.
+* **Frontend Development:** Continued implementing the frontend interface and integrating UI components with the planned backend API structure.
+* **Component Integration:** Worked on organizing the student-facing and librarian-facing interface components.
+* **Functional Testing Preparation:** Started preparing test cases for the major system workflows, including authentication, resource searching, issuing, returning, and fine retrieval.
+* **Test Scenario Identification:** Identified normal, invalid-input, and boundary scenarios for functional testing.
+
+### Outcome
+
+Completed the ER diagram and continued frontend implementation. Frontend development remained in progress, while functional test-case preparation was initiated.
+
+### What I Learned
+
+Learned the importance of validating database relationships against actual application workflows. Also understood how test cases should cover both successful operations and failure scenarios.
+
+---
+
+## Week 11 (Nov 2 – Nov 7): Frontend Refinement & Functional Test Preparation
+
+### Objective
+
+Continue frontend integration and complete the preparation of functional test cases for the Smart Library Management System.
+
+### Work Done
+
+* **Frontend Implementation:** Continued developing and refining the frontend components for the library management interface.
+* **UI Integration:** Worked on connecting the interface structure with the planned backend services and API endpoints.
+* **Student Interface:** Focused on the interface components required for resource discovery, recommendations, and circulation information.
+* **Librarian Interface:** Worked on the interface structure for library administration and monitoring-related information.
+* **Functional Test Cases:** Continued preparing test cases for the system's core functional requirements.
+* **Test Coverage Planning:** Organised test scenarios to cover valid operations, invalid inputs, database interactions, and expected system responses.
+
+### Outcome
+
+Frontend development and component integration progressed, with the Gantt chart indicating approximately 60% completion. Test-case design and preparation reached approximately 80% completion by November 3.
+
+### What I Learned
+
+Learned that frontend development requires careful coordination between UI components, backend API contracts, and database structures. Also gained experience in preparing systematic functional test cases before full system testing.
