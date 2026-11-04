@@ -35,8 +35,17 @@
 
 ---
 
-## Week 10 (Oct 12 – Oct 18): Entity-Relationship (ER) Diagram & Database Schema Modeling
+## Week 10 (Oct 12 – Oct 21): Entity-Relationship (ER) Diagram & Database Schema Modeling
 
 * **Core Entity & Table Mapping**: Designed and structured the persistent database schema, defining primary and foreign key constraints across `STUDENTS`, `EMPLOYEE`, `ASSETS`, `BOOKS`, `ISSUING_DETAILS`, `FINES`, `NOTIFICATION_QUEUE`, and `SEARCH_DEMAND_LOGS`.
 * **Relationship & Cardinality Auditing**: Corrected logical relationship errors from automated diagram generation, isolating `SEARCH_DEMAND_LOGS` as an independent student-linked audit table rather than an upstream parent of the notification queue.
 * **ER Diagram Refinement**: Polished the Chen-notation database schema to accurately represent strong entities, weak entities (`FINES`), and precise cardinality constraints across all library circulation workflows.
+
+---
+
+## Week 11 (Oct 26 – Nov 1): Test Case Design & Verification Framework
+
+* **Circulation Testing**: Authored test cases (`TC-01A`, `TC-01B`) for resource issuing, return workflows, and fine calculations.
+* **AI Agent Testing**: Designed test scenarios (`TC-02A`, `TC-02B`) to validate natural-language intent parsing, query routing, and search demand logging.
+* **Onboarding & Deduplication Testing**: Created test case `TC-03` to verify bulk CSV ingestion and automated duplicate roll-number flagging.
+* **Monitoring & Demand Analysis**: Developed test cases (`TC-04A`, `TC-04B`) to evaluate overdue fine generation and high-demand stock recommendations.
