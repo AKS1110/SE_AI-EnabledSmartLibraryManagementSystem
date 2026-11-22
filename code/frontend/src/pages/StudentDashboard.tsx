@@ -1,13 +1,15 @@
 import { useState } from "react";
 import {
-  Bot,
+  LayoutDashboard,
   Search,
   BookOpen,
   Bell,
-  LayoutDashboard,
-  Sparkles,
+  Bot,
   Menu,
   X,
+  ChevronRight,
+  Sparkles,
+  User,
 } from "lucide-react";
 
 import SearchPanel from "../components/student/SearchPanel";
@@ -22,90 +24,99 @@ interface StudentDashboardProps {
 
 function StudentDashboard({ rollNo }: StudentDashboardProps) {
   const [isAgentOpen, setIsAgentOpen] = useState(false);
-  const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
+  const scrollToSection = (sectionId: string) => {
+    const section = document.getElementById(sectionId);
+
+    if (section) {
+      section.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+    }
+
+    setIsSidebarOpen(false);
+  };
 
   return (
-    <div className="min-h-screen bg-slate-50 text-slate-900">
-      {/* Mobile overlay */}
-      {sidebarOpen && (
+    <div className="min-h-screen bg-slate-100 text-slate-900">
+      {/* Mobile sidebar overlay */}
+      {isSidebarOpen && (
         <div
           className="fixed inset-0 z-40 bg-slate-950/40 lg:hidden"
-          onClick={() => setSidebarOpen(false)}
+          onClick={() => setIsSidebarOpen(false)}
         />
       )}
 
-      {/* ================= SIDEBAR ================= */}
+      {/* Sidebar */}
       <aside
-        className={`fixed inset-y-0 left-0 z-50 w-64 transform bg-slate-950 text-white transition-transform duration-300 lg:translate-x-0 ${
-          sidebarOpen ? "translate-x-0" : "-translate-x-full"
+        className={`fixed inset-y-0 left-0 z-50 w-64 transform bg-slate-950 text-white transition-transform duration-200 lg:translate-x-0 ${
+          isSidebarOpen ? "translate-x-0" : "-translate-x-full"
         }`}
       >
         <div className="flex h-full flex-col">
           {/* Logo */}
-          <div className="flex h-20 items-center gap-3 border-b border-white/10 px-6">
-            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-indigo-600 shadow-lg shadow-indigo-600/20">
-              <BookOpen size={21} />
-            </div>
+          <div className="flex h-20 items-center justify-between border-b border-slate-800 px-5">
+            <div className="flex items-center gap-3">
+              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-indigo-600">
+                <BookOpen size={21} />
+              </div>
 
-            <div>
-              <p className="text-sm font-bold">Smart Library</p>
-              <p className="text-[11px] text-slate-400">AI-Powered System</p>
+              <div>
+                <p className="text-sm font-bold">Smart Library</p>
+                <p className="text-xs text-slate-500">
+                  Campus Intelligence
+                </p>
+              </div>
             </div>
 
             <button
-              onClick={() => setSidebarOpen(false)}
-              className="ml-auto rounded-lg p-1 text-slate-400 hover:bg-white/10 hover:text-white lg:hidden"
+              onClick={() => setIsSidebarOpen(false)}
+              className="rounded-lg p-2 text-slate-400 hover:bg-slate-800 hover:text-white lg:hidden"
             >
               <X size={20} />
             </button>
           </div>
 
           {/* Navigation */}
-          <nav className="flex-1 px-4 py-6">
-            <p className="mb-3 px-3 text-[10px] font-semibold uppercase tracking-widest text-slate-500">
-              Workspace
+          <nav className="flex-1 px-3 py-6">
+            <p className="px-3 pb-3 text-[11px] font-semibold uppercase tracking-wider text-slate-500">
+              Student Portal
             </p>
 
             <div className="space-y-1">
-              <button className="flex w-full items-center gap-3 rounded-xl bg-indigo-600 px-3 py-3 text-sm font-medium text-white shadow-lg shadow-indigo-600/10">
+              <button
+                type="button"
+                onClick={() => scrollToSection("dashboard")}
+                className="flex w-full items-center gap-3 rounded-xl bg-indigo-600 px-3 py-3 text-left text-sm font-semibold text-white transition hover:bg-indigo-500"
+              >
                 <LayoutDashboard size={18} />
                 Dashboard
               </button>
 
               <button
-                onClick={() => {
-                  document
-                    .getElementById("smart-search")
-                    ?.scrollIntoView({ behavior: "smooth" });
-                  setSidebarOpen(false);
-                }}
-                className="flex w-full items-center gap-3 rounded-xl px-3 py-3 text-sm font-medium text-slate-400 transition hover:bg-white/5 hover:text-white"
+                type="button"
+                onClick={() => scrollToSection("intelligent-search")}
+                className="flex w-full items-center gap-3 rounded-xl px-3 py-3 text-left text-sm font-medium text-slate-400 transition hover:bg-slate-900 hover:text-white"
               >
                 <Search size={18} />
-                Smart Search
+                Intelligent Search
               </button>
 
               <button
-                onClick={() => {
-                  document
-                    .getElementById("my-loans")
-                    ?.scrollIntoView({ behavior: "smooth" });
-                  setSidebarOpen(false);
-                }}
-                className="flex w-full items-center gap-3 rounded-xl px-3 py-3 text-sm font-medium text-slate-400 transition hover:bg-white/5 hover:text-white"
+                type="button"
+                onClick={() => scrollToSection("borrowed-assets")}
+                className="flex w-full items-center gap-3 rounded-xl px-3 py-3 text-left text-sm font-medium text-slate-400 transition hover:bg-slate-900 hover:text-white"
               >
                 <BookOpen size={18} />
-                My Loans
+                My Borrowed Assets
               </button>
 
               <button
-                onClick={() => {
-                  document
-                    .getElementById("notifications")
-                    ?.scrollIntoView({ behavior: "smooth" });
-                  setSidebarOpen(false);
-                }}
-                className="flex w-full items-center gap-3 rounded-xl px-3 py-3 text-sm font-medium text-slate-400 transition hover:bg-white/5 hover:text-white"
+                type="button"
+                onClick={() => scrollToSection("notifications")}
+                className="flex w-full items-center gap-3 rounded-xl px-3 py-3 text-left text-sm font-medium text-slate-400 transition hover:bg-slate-900 hover:text-white"
               >
                 <Bell size={18} />
                 Notifications
@@ -113,37 +124,44 @@ function StudentDashboard({ rollNo }: StudentDashboardProps) {
             </div>
 
             {/* AI Agent card */}
-            <div className="mt-8 rounded-2xl border border-indigo-500/20 bg-indigo-500/10 p-4">
-              <div className="mb-3 flex h-9 w-9 items-center justify-center rounded-lg bg-indigo-500/20 text-indigo-300">
-                <Sparkles size={18} />
+            <div className="mt-8 rounded-2xl border border-indigo-500/20 bg-indigo-600/10 p-4">
+              <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-indigo-600">
+                <Sparkles size={17} />
               </div>
 
-              <p className="text-sm font-semibold">Campus AI Agent</p>
+              <p className="mt-3 text-sm font-semibold text-white">
+                Campus Intelligence
+              </p>
 
-              <p className="mt-1 text-xs leading-relaxed text-slate-400">
-                Ask questions about books, loans, fines and library resources.
+              <p className="mt-1 text-xs leading-5 text-slate-400">
+                Need help finding a resource or checking your library
+                activity?
               </p>
 
               <button
+                type="button"
                 onClick={() => setIsAgentOpen(true)}
-                className="mt-4 flex w-full items-center justify-center gap-2 rounded-lg bg-indigo-600 px-3 py-2 text-xs font-semibold transition hover:bg-indigo-500"
+                className="mt-4 flex w-full items-center justify-between rounded-lg bg-slate-900 px-3 py-2.5 text-xs font-semibold text-white transition hover:bg-slate-800"
               >
-                <Bot size={15} />
-                Ask Agent
+                Ask AI Agent
+                <ChevronRight size={15} />
               </button>
             </div>
           </nav>
 
-          {/* Student profile */}
-          <div className="border-t border-white/10 p-4">
-            <div className="flex items-center gap-3 rounded-xl bg-white/5 p-3">
+          {/* Sidebar profile */}
+          <div className="border-t border-slate-800 p-4">
+            <div className="flex items-center gap-3 rounded-xl bg-slate-900 p-3">
               <div className="flex h-9 w-9 items-center justify-center rounded-full bg-indigo-600 text-sm font-bold">
                 A
               </div>
 
               <div className="min-w-0">
-                <p className="text-xs font-medium text-white">Student</p>
-                <p className="truncate text-[11px] text-slate-400">
+                <p className="truncate text-sm font-semibold text-white">
+                  Student
+                </p>
+
+                <p className="truncate text-xs text-slate-500">
                   {rollNo}
                 </p>
               </div>
@@ -152,199 +170,186 @@ function StudentDashboard({ rollNo }: StudentDashboardProps) {
         </div>
       </aside>
 
-      {/* ================= MAIN AREA ================= */}
+      {/* Main area */}
       <div className="lg:pl-64">
         {/* Top bar */}
-        <header className="sticky top-0 z-30 border-b border-slate-200 bg-white/90 backdrop-blur">
+        <header className="sticky top-0 z-30 border-b border-slate-200 bg-white/95 backdrop-blur">
           <div className="flex h-20 items-center justify-between px-5 sm:px-8">
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-3">
               <button
-                onClick={() => setSidebarOpen(true)}
-                className="rounded-xl border border-slate-200 p-2 text-slate-600 hover:bg-slate-50 lg:hidden"
+                type="button"
+                onClick={() => setIsSidebarOpen(true)}
+                className="rounded-xl p-2 text-slate-600 hover:bg-slate-100 lg:hidden"
               >
-                <Menu size={20} />
+                <Menu size={22} />
               </button>
 
-              <div>
-                <p className="text-xs font-medium text-slate-400">
+              <div className="lg:hidden">
+                <p className="text-sm font-bold text-slate-900">
+                  Smart Library
+                </p>
+              </div>
+
+              <div className="hidden lg:block">
+                <p className="text-xs font-medium uppercase tracking-wider text-slate-400">
                   Student Portal
                 </p>
+
                 <p className="text-sm font-semibold text-slate-800">
-                  AI-Enabled Smart Library
+                  Library Dashboard
                 </p>
               </div>
             </div>
 
             <div className="flex items-center gap-3">
               <button
+                type="button"
                 onClick={() => setIsAgentOpen(true)}
                 className="hidden items-center gap-2 rounded-xl border border-indigo-100 bg-indigo-50 px-4 py-2.5 text-sm font-semibold text-indigo-700 transition hover:bg-indigo-100 sm:flex"
               >
                 <Bot size={17} />
-                Campus Agent
+                Ask Campus Agent
               </button>
 
-              <button className="relative rounded-xl border border-slate-200 p-2.5 text-slate-600 transition hover:bg-slate-50">
-                <Bell size={18} />
+              <button
+                type="button"
+                onClick={() => scrollToSection("notifications")}
+                className="relative rounded-xl border border-slate-200 p-2.5 text-slate-500 transition hover:bg-slate-50 hover:text-slate-900"
+              >
+                <Bell size={19} />
 
-                <span className="absolute right-2 top-2 h-2 w-2 rounded-full bg-indigo-600 ring-2 ring-white" />
+                <span className="absolute right-2 top-2 h-2 w-2 rounded-full bg-red-500" />
               </button>
 
-              <div className="flex h-9 w-9 items-center justify-center rounded-full bg-slate-900 text-sm font-bold text-white">
-                A
+              <div className="hidden h-9 w-px bg-slate-200 sm:block" />
+
+              <div className="flex items-center gap-2">
+                <div className="flex h-9 w-9 items-center justify-center rounded-full bg-indigo-100 text-sm font-bold text-indigo-700">
+                  A
+                </div>
+
+                <div className="hidden text-left md:block">
+                  <p className="text-xs text-slate-400">Logged in as</p>
+
+                  <p className="text-sm font-semibold text-slate-800">
+                    {rollNo}
+                  </p>
+                </div>
               </div>
             </div>
           </div>
         </header>
 
-        {/* ================= CONTENT ================= */}
-        <main className="mx-auto max-w-[1500px] px-5 py-7 sm:px-8 lg:px-10">
+        {/* Dashboard content */}
+        <main
+          id="dashboard"
+          className="mx-auto max-w-7xl px-5 py-7 sm:px-8"
+        >
           {/* Welcome */}
-          <section className="mb-8">
+          <section className="mb-7 scroll-mt-24">
             <div className="flex flex-col justify-between gap-5 md:flex-row md:items-end">
               <div>
-                <div className="mb-2 inline-flex items-center gap-2 rounded-full bg-indigo-50 px-3 py-1 text-xs font-semibold text-indigo-600">
-                  <span className="h-1.5 w-1.5 rounded-full bg-indigo-600" />
-                  Library Dashboard
+                <div className="mb-2 flex items-center gap-2 text-sm font-medium text-indigo-600">
+                  <Sparkles size={16} />
+                  AI-powered library
                 </div>
 
-                <h1 className="text-3xl font-bold tracking-tight text-slate-950 sm:text-4xl">
+                <h1 className="text-2xl font-bold tracking-tight text-slate-950 sm:text-3xl">
                   Welcome back 👋
                 </h1>
 
-                <p className="mt-2 max-w-2xl text-sm leading-6 text-slate-500 sm:text-base">
-                  Search resources, manage your borrowed assets and stay on
-                  top of your library activity.
+                <p className="mt-2 max-w-2xl text-sm leading-6 text-slate-500">
+                  Discover resources, manage your borrowed assets, and stay
+                  updated with your library activity.
                 </p>
               </div>
 
-              <div className="hidden text-right md:block">
-                <p className="text-xs text-slate-400">Student ID</p>
-                <p className="mt-1 font-semibold text-slate-800">{rollNo}</p>
+              <div className="flex items-center gap-3 rounded-xl border border-slate-200 bg-white px-4 py-3 shadow-sm">
+                <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-slate-100">
+                  <User size={17} className="text-slate-500" />
+                </div>
+
+                <div>
+                  <p className="text-xs text-slate-400">Student ID</p>
+
+                  <p className="text-sm font-semibold text-slate-800">
+                    {rollNo}
+                  </p>
+                </div>
               </div>
             </div>
           </section>
 
-          {/* ================= STATS ================= */}
-          <section className="mb-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {/* Overview statistics */}
+          <section className="mb-7 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             <StatCard
-              title="Smart Search"
-              value="AI Powered"
-              description="Natural language resource discovery"
-              icon="🔎"
-            />
-
-            <StatCard
-              title="Borrowed Assets"
-              value="2 Active"
-              description="Keep track of your current loans"
+              title="Active Loans"
+              value="2"
+              description="Currently borrowed resources"
               icon="📚"
             />
 
             <StatCard
               title="Outstanding Fine"
               value="₹100"
-              description="Pending library fine"
+              description="Pending library payment"
               icon="₹"
+            />
+
+            <StatCard
+              title="Notifications"
+              value="2"
+              description="Unread library updates"
+              icon="🔔"
             />
           </section>
 
-          {/* ================= AI SEARCH ================= */}
+          {/* Intelligent Search */}
           <section
-            id="smart-search"
-            className="mb-8 overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm"
+            id="intelligent-search"
+            className="mb-7 scroll-mt-24"
           >
-            <div className="border-b border-slate-100 bg-gradient-to-r from-indigo-50/80 via-white to-white px-6 py-5 sm:px-8">
-              <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-                <div className="flex items-center gap-3">
-                  <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-indigo-600 text-white shadow-lg shadow-indigo-600/20">
-                    <Search size={21} />
-                  </div>
+            <div className="mb-3 flex items-center gap-2">
+              <Search size={17} className="text-indigo-600" />
 
-                  <div>
-                    <h2 className="font-bold text-slate-900">
-                      Intelligent Library Search
-                    </h2>
-                    <p className="text-xs text-slate-500">
-                      Search naturally with the Campus Intelligence Agent
-                    </p>
-                  </div>
-                </div>
-
-                <span className="inline-flex w-fit items-center gap-1.5 rounded-full bg-emerald-50 px-3 py-1.5 text-xs font-semibold text-emerald-600">
-                  <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
-                  AI Online
-                </span>
-              </div>
+              <h2 className="text-sm font-bold text-slate-800">
+                Intelligent Search
+              </h2>
             </div>
 
-            <div className="p-5 sm:p-8">
-              <SearchPanel rollNo={rollNo} />
-            </div>
+            <SearchPanel rollNo={rollNo} />
           </section>
 
-          {/* ================= LOANS + NOTIFICATIONS ================= */}
+          {/* Bottom dashboard widgets */}
           <section className="grid gap-6 xl:grid-cols-5">
             <div
-              id="my-loans"
-              className="xl:col-span-3 overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm"
+              id="borrowed-assets"
+              className="scroll-mt-24 xl:col-span-3"
             >
-              <div className="flex items-center justify-between border-b border-slate-100 px-6 py-5">
-                <div className="flex items-center gap-3">
-                  <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-slate-100 text-slate-700">
-                    <BookOpen size={19} />
-                  </div>
-
-                  <div>
-                    <h2 className="font-bold text-slate-900">My Loans</h2>
-                    <p className="text-xs text-slate-500">
-                      Current borrowed resources
-                    </p>
-                  </div>
-                </div>
-
-                <span className="rounded-full bg-slate-100 px-3 py-1 text-xs font-semibold text-slate-600">
-                  Active
-                </span>
-              </div>
-
-              <div className="p-5 sm:p-6">
-                <LoanTracker rollNo={rollNo} />
-              </div>
+              <LoanTracker rollNo={rollNo} />
             </div>
 
             <div
               id="notifications"
-              className="xl:col-span-2 overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm"
+              className="scroll-mt-24 xl:col-span-2"
             >
-              <div className="flex items-center justify-between border-b border-slate-100 px-6 py-5">
-                <div className="flex items-center gap-3">
-                  <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-slate-100 text-slate-700">
-                    <Bell size={19} />
-                  </div>
-
-                  <div>
-                    <h2 className="font-bold text-slate-900">
-                      Notifications
-                    </h2>
-                    <p className="text-xs text-slate-500">
-                      Important library updates
-                    </p>
-                  </div>
-                </div>
-
-                <span className="flex h-2.5 w-2.5 rounded-full bg-indigo-600" />
-              </div>
-
-              <div className="p-5 sm:p-6">
-                <NotificationCenter />
-              </div>
+              <NotificationCenter />
             </div>
           </section>
+
+          {/* Mobile AI button */}
+          <button
+            type="button"
+            onClick={() => setIsAgentOpen(true)}
+            className="fixed bottom-5 right-5 z-30 flex h-14 w-14 items-center justify-center rounded-full bg-indigo-600 text-white shadow-xl transition hover:bg-indigo-700 sm:hidden"
+            aria-label="Open Campus Agent"
+          >
+            <Bot size={23} />
+          </button>
         </main>
       </div>
 
-      {/* ================= CAMPUS AI AGENT ================= */}
+      {/* AI Assistant */}
       <CampusAgent
         isOpen={isAgentOpen}
         onClose={() => setIsAgentOpen(false)}
