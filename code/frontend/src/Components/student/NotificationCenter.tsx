@@ -7,12 +7,21 @@ import {
   PackageCheck,
 } from "lucide-react";
 
-import { useNotifications } from "../../hooks/useNotifications";
+import type { MockNotification } from "../../mockData/mockData";
 
-function NotificationCenter() {
-  const { notifications, unreadCount, markAsRead, markAllAsRead } =
-    useNotifications();
+interface NotificationCenterProps {
+  notifications: MockNotification[];
+  unreadCount: number;
+  markAsRead: (id: number) => void;
+  markAllAsRead: () => void;
+}
 
+function NotificationCenter({
+  notifications,
+  unreadCount,
+  markAsRead,
+  markAllAsRead,
+}: NotificationCenterProps) {
   const getNotificationIcon = (type: string) => {
     switch (type) {
       case "OVERDUE":

@@ -1,3 +1,11 @@
+import {
+  FINE_PER_DAY,
+  LOAN_PERIOD_DAYS,
+  calculateLoanDetails,
+  daysFromToday,
+  formatLongDate,
+} from "../utils/loanRules";
+
 export interface MockStudent {
   Roll_No: string;
   Name: string;
@@ -164,62 +172,94 @@ export const mockAssets: MockAsset[] = [
   },
 ];
 
+const STUDENT_ROLL_NO = "1024160010";
+
+// Builds a mock loan from "how many days ago" values, so the demo data
+// stays correct on any day. Due date, fine and status are worked out by
+// the same rules the app uses (see utils/loanRules.ts).
+function makeLoan(options: {
+  issueId: number;
+  assetName: string;
+  issuedDaysAgo: number;
+  returnedDaysAgo: number | null;
+  paidStatus: MockLoan["Paid_Status"];
+}): MockLoan {
+  return calculateLoanDetails({
+    Issue_Id: options.issueId,
+    Roll_No: STUDENT_ROLL_NO,
+    Asset_Name: options.assetName,
+    Issue_Date: daysFromToday(-options.issuedDaysAgo),
+    Due_Date: daysFromToday(LOAN_PERIOD_DAYS - options.issuedDaysAgo),
+    Return_Date:
+      options.returnedDaysAgo === null
+        ? null
+        : daysFromToday(-options.returnedDaysAgo),
+    Status: options.returnedDaysAgo === null ? "ISSUED" : "RETURNED",
+    Overdue_Days: 0,
+    Fine_Amount: 0,
+    Paid_Status: options.paidStatus,
+  });
+}
+
+// Borrowed 10 days ago, due in 4 days: active, not overdue.
+const aiBookLoan = makeLoan({
+  issueId: 501,
+  assetName: "Artificial Intelligence: A Modern Approach",
+  issuedDaysAgo: 10,
+  returnedDaysAgo: null,
+  paidStatus: null,
+});
+
+// Borrowed 20 days ago, due 6 days ago: overdue, fine still growing.
+const cleanCodeLoan = makeLoan({
+  issueId: 502,
+  assetName: "Clean Code",
+  issuedDaysAgo: 20,
+  returnedDaysAgo: null,
+  paidStatus: null,
+});
+
+// Returned 2 days before it was due: no fine.
+const databaseLoan = makeLoan({
+  issueId: 503,
+  assetName: "Database System Concepts",
+  issuedDaysAgo: 40,
+  returnedDaysAgo: 28,
+  paidStatus: "PAID",
+});
+
+// Returned 3 days late: fine is final but still unpaid.
+const osLoan = makeLoan({
+  issueId: 505,
+  assetName: "Operating System Concepts",
+  issuedDaysAgo: 30,
+  returnedDaysAgo: 13,
+  paidStatus: null,
+});
+
 export const mockLoans: MockLoan[] = [
-  {
-    Issue_Id: 501,
-    Roll_No: "1024160010",
-    Asset_Name: "Artificial Intelligence: A Modern Approach",
-    Issue_Date: "2026-08-20",
-    Due_Date: "2026-09-10",
-    Return_Date: null,
-    Status: "ISSUED",
-    Overdue_Days: 0,
-    Fine_Amount: 0,
-    Paid_Status: null,
-  },
-  {
-    Issue_Id: 502,
-    Roll_No: "1024160010",
-    Asset_Name: "Clean Code",
-    Issue_Date: "2026-08-01",
-    Due_Date: "2026-08-20",
-    Return_Date: null,
-    Status: "OVERDUE",
-    Overdue_Days: 20,
-    Fine_Amount: 100,
-    Paid_Status: "UNPAID",
-  },
-  {
-    Issue_Id: 503,
-    Roll_No: "1024160010",
-    Asset_Name: "Database System Concepts",
-    Issue_Date: "2026-07-10",
-    Due_Date: "2026-07-30",
-    Return_Date: "2026-07-28",
-    Status: "RETURNED",
-    Overdue_Days: 0,
-    Fine_Amount: 0,
-    Paid_Status: "PAID",
-  },
+  aiBookLoan,
+  cleanCodeLoan,
+  databaseLoan,
+  osLoan,
 ];
 
+// Messages are built from the loans above, so they always match.
 export const mockNotifications: MockNotification[] = [
   {
     id: 1,
     type: "OVERDUE",
     title: "Book Overdue",
-    message:
-      "Clean Code is overdue by 20 days. Please return it and clear the pending fine.",
-    date: "2026-09-09",
+    message: `${cleanCodeLoan.Asset_Name} is overdue by ${cleanCodeLoan.Overdue_Days} days. Return it to stop the fine from growing (₹${FINE_PER_DAY} per day).`,
+    date: daysFromToday(0),
     read: false,
   },
   {
     id: 2,
     type: "REMINDER",
     title: "Return Reminder",
-    message:
-      "Artificial Intelligence: A Modern Approach is due on September 10, 2026.",
-    date: "2026-09-09",
+    message: `${aiBookLoan.Asset_Name} is due on ${formatLongDate(aiBookLoan.Due_Date)}.`,
+    date: daysFromToday(0),
     read: false,
   },
   {
@@ -227,7 +267,7 @@ export const mockNotifications: MockNotification[] = [
     type: "COLLECTION",
     title: "Collection Notification",
     message: "Your requested library collection is ready for pickup.",
-    date: "2026-09-08",
+    date: daysFromToday(-1),
     read: true,
   },
 ];
@@ -255,24 +295,26 @@ export const mockDemandLogs: MockDemandLog[] = [
   },
 ];
 
+const AMAN_DAYS_LATE = 9;
+
 export const mockOverdueIssues: MockOverdueIssue[] = [
   {
-    issue_id: 502,
+    issue_id: cleanCodeLoan.Issue_Id,
     student_name: "Arnav Agarwal",
-    roll_no: "1024160010",
-    asset_name: "Clean Code",
-    due_date: "2026-08-20",
-    days_late: 20,
-    fine_amount: 100,
+    roll_no: cleanCodeLoan.Roll_No,
+    asset_name: cleanCodeLoan.Asset_Name,
+    due_date: cleanCodeLoan.Due_Date,
+    days_late: cleanCodeLoan.Overdue_Days,
+    fine_amount: cleanCodeLoan.Fine_Amount,
   },
   {
     issue_id: 504,
     student_name: "Aman Sharma",
     roll_no: "1024160011",
     asset_name: "Computer Networks",
-    due_date: "2026-08-28",
-    days_late: 12,
-    fine_amount: 60,
+    due_date: daysFromToday(-AMAN_DAYS_LATE),
+    days_late: AMAN_DAYS_LATE,
+    fine_amount: AMAN_DAYS_LATE * FINE_PER_DAY,
   },
 ];
 

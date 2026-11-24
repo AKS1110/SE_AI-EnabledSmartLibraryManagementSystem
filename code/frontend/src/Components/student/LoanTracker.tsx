@@ -7,6 +7,7 @@ import {
 } from "lucide-react";
 
 import { useStudentLoans } from "../../hooks/useStudentLoans";
+import { getLoanSummary } from "../../utils/loanSummary";
 import StatusBadge from "../common/StatusBadge";
 
 interface LoanTrackerProps {
@@ -14,13 +15,20 @@ interface LoanTrackerProps {
 }
 
 function LoanTracker({ rollNo }: LoanTrackerProps) {
-  const { loans, returnAsset } = useStudentLoans(rollNo);
-
+const { loans, returnAsset, payFine } = useStudentLoans(rollNo);
   const activeLoans = loans.filter((loan) => loan.Status !== "RETURNED");
 
-  const outstandingFine = activeLoans
-    .filter((loan) => loan.Paid_Status === "UNPAID")
-    .reduce((total, loan) => total + loan.Fine_Amount, 0);
+    // Returned books whose fine has not been paid yet
+  const unpaidReturnedLoans = loans.filter(
+    (loan) =>
+      loan.Status === "RETURNED" &&
+      loan.Fine_Amount > 0 &&
+      loan.Paid_Status === "UNPAID"
+  );
+
+  // Fines still owed: overdue active loans + returned loans not yet paid
+  // Fines still owed: overdue active loans + returned loans not yet paid
+  const { outstandingFine } = getLoanSummary(loans);
 
   const overdueLoans = activeLoans.filter(
     (loan) => loan.Status === "OVERDUE"
@@ -185,6 +193,42 @@ function LoanTracker({ rollNo }: LoanTrackerProps) {
                 </div>
               </div>
             ))}
+          </div>
+                )}
+
+        {/* Fines of returned books that still need to be paid */}
+        {unpaidReturnedLoans.length > 0 && (
+          <div className="mt-6">
+            <h3 className="mb-3 text-xs font-semibold uppercase tracking-wide text-slate-400">
+              Fines to pay
+            </h3>
+
+            <div className="space-y-3">
+              {unpaidReturnedLoans.map((loan) => (
+                <div
+                  key={loan.Issue_Id}
+                  className="flex flex-col gap-3 rounded-xl border border-amber-100 bg-amber-50/50 p-4 sm:flex-row sm:items-center sm:justify-between"
+                >
+                  <div className="min-w-0">
+                    <p className="truncate text-sm font-semibold text-slate-900">
+                      {loan.Asset_Name}
+                    </p>
+                    <p className="mt-1 text-xs text-slate-500">
+                      Returned {loan.Return_Date} · {loan.Overdue_Days} days late
+                    </p>
+                  </div>
+
+                  <button
+                    type="button"
+                    onClick={() => payFine(loan.Issue_Id)}
+                    className="inline-flex shrink-0 items-center justify-center gap-1 rounded-lg bg-indigo-600 px-4 py-2 text-xs font-semibold text-white transition hover:bg-indigo-700"
+                  >
+                    Pay <IndianRupee size={12} />
+                    {loan.Fine_Amount}
+                  </button>
+                </div>
+              ))}
+            </div>
           </div>
         )}
       </div>

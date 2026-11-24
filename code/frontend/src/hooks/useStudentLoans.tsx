@@ -1,4 +1,3 @@
-
 import {
   createContext,
   useContext,
@@ -8,64 +7,21 @@ import {
 
 import { mockLoans } from "../mockData/mockData";
 import type { MockLoan } from "../mockData/mockData";
-
-const LOAN_PERIOD_DAYS = 14;
-const FINE_PER_DAY = 2;
+import {
+  LOAN_PERIOD_DAYS,
+  calculateLoanDetails,
+  formatDate,
+} from "../utils/loanRules";
 
 interface StudentLoansContextType {
   loans: MockLoan[];
   issueAsset: (rollNo: string, assetName: string) => void;
   returnAsset: (issueId: number) => void;
+  payFine: (issueId: number) => void;
 }
 
 const StudentLoansContext =
   createContext<StudentLoansContextType | null>(null);
-
-function formatDate(date: Date): string {
-  const year = date.getFullYear();
-  const month = String(date.getMonth() + 1).padStart(2, "0");
-  const day = String(date.getDate()).padStart(2, "0");
-
-  return `${year}-${month}-${day}`;
-}
-
-// Converts YYYY-MM-DD into a UTC timestamp to compare calendar dates.
-function getDateTimestamp(dateString: string): number {
-  const [year, month, day] = dateString.split("-").map(Number);
-
-  return Date.UTC(year, month - 1, day);
-}
-
-function calculateLoanDetails(loan: MockLoan): MockLoan {
-  const today = formatDate(new Date());
-
-  // For returned books, calculate the fine up to the return date.
-  const referenceDate = loan.Return_Date ?? today;
-
-  const dueTimestamp = getDateTimestamp(loan.Due_Date);
-  const referenceTimestamp = getDateTimestamp(referenceDate);
-
-  const overdueDays = Math.max(
-    0,
-    Math.floor(
-      (referenceTimestamp - dueTimestamp) / (1000 * 60 * 60 * 24)
-    )
-  );
-
-  const fineAmount = overdueDays * FINE_PER_DAY;
-
-  return {
-    ...loan,
-    Overdue_Days: overdueDays,
-    Fine_Amount: fineAmount,
-    Status:
-      loan.Status === "RETURNED"
-        ? "RETURNED"
-        : overdueDays > 0
-          ? "OVERDUE"
-          : "ISSUED",
-  };
-}
 
 export function StudentLoansProvider({
   children,
@@ -99,12 +55,23 @@ export function StudentLoansProvider({
   const returnAsset = (issueId: number) => {
     setLoans((currentLoans) =>
       currentLoans.map((loan) =>
-        loan.Issue_Id === issueId
+        loan.Issue_Id === issueId && loan.Status !== "RETURNED"
           ? {
               ...loan,
               Status: "RETURNED",
               Return_Date: formatDate(new Date()),
             }
+          : loan
+      )
+    );
+  };
+
+  // Marks the fine of a returned loan as paid.
+  const payFine = (issueId: number) => {
+    setLoans((currentLoans) =>
+      currentLoans.map((loan) =>
+        loan.Issue_Id === issueId && loan.Status === "RETURNED"
+          ? { ...loan, Paid_Status: "PAID" }
           : loan
       )
     );
@@ -116,6 +83,7 @@ export function StudentLoansProvider({
         loans,
         issueAsset,
         returnAsset,
+        payFine,
       }}
     >
       {children}
@@ -123,6 +91,7 @@ export function StudentLoansProvider({
   );
 }
 
+// eslint-disable-next-line react-refresh/only-export-components
 export function useStudentLoans(rollNo: string) {
   const context = useContext(StudentLoansContext);
 
@@ -141,5 +110,7 @@ export function useStudentLoans(rollNo: string) {
       context.issueAsset(rollNo, assetName),
 
     returnAsset: context.returnAsset,
+
+    payFine: context.payFine,
   };
 }

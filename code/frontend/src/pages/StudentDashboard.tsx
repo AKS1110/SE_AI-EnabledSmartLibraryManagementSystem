@@ -12,11 +12,14 @@ import {
   User,
 } from "lucide-react";
 
-import SearchPanel from "../components/student/SearchPanel";
-import LoanTracker from "../components/student/LoanTracker";
-import NotificationCenter from "../components/student/NotificationCenter";
-import CampusAgent from "../components/student/CampusAgent";
-import StatCard from "../components/common/StatCard";
+import SearchPanel from "../Components/student/SearchPanel";
+import LoanTracker from "../Components/student/LoanTracker";
+import NotificationCenter from "../Components/student/NotificationCenter";
+import CampusAgent from "../Components/student/CampusAgent";
+import StatCard from "../Components/common/StatCard";
+import { useStudentLoans } from "../hooks/useStudentLoans";
+import { useNotifications } from "../hooks/useNotifications";
+import { getLoanSummary } from "../utils/loanSummary";
 
 interface StudentDashboardProps {
   rollNo: string;
@@ -25,6 +28,13 @@ interface StudentDashboardProps {
 function StudentDashboard({ rollNo }: StudentDashboardProps) {
   const [isAgentOpen, setIsAgentOpen] = useState(false);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
+  const { loans } = useStudentLoans(rollNo);
+  const { notifications, unreadCount, markAsRead, markAllAsRead } =
+    useNotifications();
+
+  const { activeLoanCount, overdueLoanCount, outstandingFine } =
+    getLoanSummary(loans);
 
   const scrollToSection = (sectionId: string) => {
     const section = document.getElementById(sectionId);
@@ -218,7 +228,9 @@ function StudentDashboard({ rollNo }: StudentDashboardProps) {
               >
                 <Bell size={19} />
 
-                <span className="absolute right-2 top-2 h-2 w-2 rounded-full bg-red-500" />
+                {unreadCount > 0 && (
+                  <span className="absolute right-2 top-2 h-2 w-2 rounded-full bg-red-500" />
+                )}
               </button>
 
               <div className="hidden h-9 w-px bg-slate-200 sm:block" />
@@ -284,21 +296,29 @@ function StudentDashboard({ rollNo }: StudentDashboardProps) {
           <section className="mb-7 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             <StatCard
               title="Active Loans"
-              value="2"
-              description="Currently borrowed resources"
+              value={activeLoanCount}
+              description={
+                overdueLoanCount > 0
+                  ? `${overdueLoanCount} overdue`
+                  : "Currently borrowed resources"
+              }
               icon="📚"
             />
 
             <StatCard
               title="Outstanding Fine"
-              value="₹100"
-              description="Pending library payment"
+              value={`₹${outstandingFine}`}
+              description={
+                outstandingFine > 0
+                  ? "Pending library payment"
+                  : "No pending fines"
+              }
               icon="₹"
             />
 
             <StatCard
               title="Notifications"
-              value="2"
+              value={unreadCount}
               description="Unread library updates"
               icon="🔔"
             />
@@ -333,7 +353,12 @@ function StudentDashboard({ rollNo }: StudentDashboardProps) {
               id="notifications"
               className="scroll-mt-24 xl:col-span-2"
             >
-              <NotificationCenter />
+              <NotificationCenter
+                notifications={notifications}
+                unreadCount={unreadCount}
+                markAsRead={markAsRead}
+                markAllAsRead={markAllAsRead}
+              />
             </div>
           </section>
 
